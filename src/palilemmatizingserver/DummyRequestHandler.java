@@ -1,0 +1,50 @@
+package palilemmatizingserver;
+
+
+import de.general.jettyserver.*;
+import de.general.log.*;
+
+
+/**
+ *
+ * @author knauth
+ */
+public class DummyRequestHandler implements IRequestHandler<AppRuntime>
+{
+
+	////////////////////////////////////////////////////////////////
+	// Constants
+	////////////////////////////////////////////////////////////////
+
+	////////////////////////////////////////////////////////////////
+	// Variables
+	////////////////////////////////////////////////////////////////
+
+	////////////////////////////////////////////////////////////////
+	// Constructors
+	////////////////////////////////////////////////////////////////
+
+	/**
+	 * Constructor.
+	 */
+	public DummyRequestHandler()
+	{
+	}
+
+	////////////////////////////////////////////////////////////////
+	// Methods
+	////////////////////////////////////////////////////////////////
+
+	@Override
+	public ResponseContainer processRequest(AppRuntime appRuntime, ClientRequest requestWrapper, ILogInterface log) throws Exception
+	{
+		if (requestWrapper.getRequestPath().equals("/api/json/noop")) {
+			String query = requestWrapper.getRequestQuery();
+			if (query == null) query = "";
+			else query = " (" + query + ")";
+			return ResponseContainer.createTextResponse(0, "Hello World!" + query);
+		}
+		return null;
+	}
+
+}
