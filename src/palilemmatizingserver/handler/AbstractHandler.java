@@ -8,7 +8,7 @@ import de.general.json.JValue;
 
 public abstract class AbstractHandler implements IRequestHandler<AppRuntime> {
 
-	protected ResponseContainer createError(String msg) throws Exception {
+	ResponseContainer createError(String msg) throws Exception {
 		JObject jsonData = new JObject();
 		JObject errmsg = new JObject();
 		jsonData.add("error", errmsg);
