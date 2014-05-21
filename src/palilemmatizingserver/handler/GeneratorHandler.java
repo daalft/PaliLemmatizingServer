@@ -33,9 +33,16 @@ public class GeneratorHandler extends AbstractHandler {
 			}
 		}
 		MorphologyGenerator mg = new MorphologyGenerator();
-		String json = WordConverter.toJSONStringGenerator(mg.generate(word, wc, opt));
+		String json = "";
+		try{
+			json = WordConverter.toJSONStringGenerator(mg.generate(word, wc, opt));
+		} catch (Exception e) {
+			return createError(e.getMessage());
+		}
+		
 		JObject jsonData = new JObject();
-		jsonData.add("success", new JValue(json));
+		JObject pjson = WordConverter.toJObject(json);
+		jsonData.add("success", pjson);
 		ResponseContainer rc = ResponseContainer.createJSONResponse(0, jsonData);
 		return rc;
 	}
