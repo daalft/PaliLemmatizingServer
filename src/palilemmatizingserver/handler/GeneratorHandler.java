@@ -5,6 +5,8 @@ import palilemmatizingserver.AppRuntime;
 import palilemmatizingserver.handler.helper.RestrictGetter;
 import de.general.jettyserver.ClientRequest;
 import de.general.jettyserver.ResponseContainer;
+import de.general.json.JObject;
+import de.general.json.JValue;
 import de.general.log.ILogInterface;
 import de.unitrier.daalft.pali.morphology.MorphologyGenerator;
 import de.unitrier.daalft.pali.tools.WordConverter;
@@ -31,8 +33,10 @@ public class GeneratorHandler extends AbstractHandler {
 			}
 		}
 		MorphologyGenerator mg = new MorphologyGenerator();
-		String out = WordConverter.toJSONStringGenerator(mg.generate(word, wc, opt));
-		ResponseContainer rc = ResponseContainer.createTextResponse(0, out);
+		String json = WordConverter.toJSONStringGenerator(mg.generate(word, wc, opt));
+		JObject jsonData = new JObject();
+		jsonData.add("success", new JValue(json));
+		ResponseContainer rc = ResponseContainer.createJSONResponse(0, jsonData);
 		return rc;
 	}
 
