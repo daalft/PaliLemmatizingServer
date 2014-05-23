@@ -1,12 +1,13 @@
 package palilemmatizingserver;
 
 
-import de.general.jettyserver.IIPAddressFilter;
+import de.general.jettyserver.*;
 import de.general.cfg.*;
 import de.general.jettyserver.*;
 import de.general.log.*;
 
-
+import palilemmatizingserver.handler.*;
+import palilemmatizingserver.handler.conv.*;
 
 /**
  *
@@ -27,6 +28,8 @@ public class AppRuntime implements IAppRuntime
 	AppConfiguration cfg;
 
 	IIPAddressFilter ipAddressFilter;
+
+	FormatConverterManager formatConverterManager;
 
 	////////////////////////////////////////////////////////////////
 	// Constructors
@@ -62,6 +65,9 @@ public class AppRuntime implements IAppRuntime
 		cfg.load();
 
 		// TODO: fill ipAddressFilter-variable
+
+		formatConverterManager = new FormatConverterManager();
+		formatConverterManager.register(ConverterWordFormGeneration.class);
 	}
 
 	@Override
@@ -74,6 +80,11 @@ public class AppRuntime implements IAppRuntime
 	public int getWebServerPortFromConfiguration()
 	{
 		return cfg.getPort();
+	}
+
+	public FormatConverterManager getFormatConverterManager()
+	{
+		return formatConverterManager;
 	}
 
 }

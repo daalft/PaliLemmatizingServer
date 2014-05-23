@@ -1,12 +1,15 @@
 package palilemmatizingserver.handler;
 
 
+import java.util.*;
+
 import palilemmatizingserver.AppRuntime;
 import palilemmatizingserver.handler.helper.RestrictGetter;
 import de.general.jettyserver.*;
 import de.general.json.JObject;
 import de.general.log.ILogInterface;
 import de.unitrier.daalft.pali.morphology.MorphologyGenerator;
+import de.unitrier.daalft.pali.morphology.element.*;
 import de.unitrier.daalft.pali.tools.WordConverter;
 
 
@@ -18,6 +21,9 @@ public class GeneratorHandler extends AbstractHandler
 			ClientRequest request, ILogInterface log) throws Exception {
 		// optional arguments: word class, gender for noun, declension for verb
 		log.info("Invoking generator");
+
+		// ----
+
 		RestrictGetter rg = new RestrictGetter();
 		String word = request.getRequestParameter("word");
 		//String json = request.getRequestParameter("restrict");
@@ -32,16 +38,19 @@ public class GeneratorHandler extends AbstractHandler
 				opt = rg.get("declension", request);
 			}
 		}
+
+		// ----
+
 		MorphologyGenerator mg = new MorphologyGenerator();
-		String json = "";
-		try{
-			json = WordConverter.toJSONStringGenerator(mg.generate(word, wc, opt));
-		} catch (Exception e) {
-			return createError(e.getMessage());
+		List<ConstructedWord> constructedWords = mg.generate(word, wc, opt);
+		if ((constructedWords == null) || (constructedWords.size() == 0)) {
+			return createError("No word forms generated!");
 		}
-		
+
+		// ----
+
 		JObject jsonData = new JObject();
-		JObject pjson = WordConverter.toJObject(json);
+		JObject pjson = (JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", constructedWords));
 		jsonData.add("success", pjson);
 		ResponseContainer rc = ResponseContainer.createJSONResponse(jsonData);
 		return rc;
