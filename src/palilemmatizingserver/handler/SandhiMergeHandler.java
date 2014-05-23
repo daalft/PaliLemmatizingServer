@@ -1,5 +1,6 @@
 package palilemmatizingserver.handler;
 
+
 import palilemmatizingserver.AppRuntime;
 import de.general.jettyserver.ClientRequest;
 import de.general.jettyserver.ResponseContainer;
@@ -8,7 +9,9 @@ import de.general.log.ILogInterface;
 import de.unitrier.daalft.pali.phonology.SandhiMerge;
 import de.unitrier.daalft.pali.tools.WordConverter;
 
-public class SandhiMergeHandler extends AbstractHandler {
+
+public class SandhiMergeHandler extends AbstractHandler
+{
 
 	@Override
 	public ResponseContainer processRequest(AppRuntime ar,
@@ -17,7 +20,7 @@ public class SandhiMergeHandler extends AbstractHandler {
 		String w1 = request.getRequestParameter("word");
 		String w2 = request.getRequestParameter("word2");
 		if (w1 == null || w2 == null || w1.isEmpty() || w2.isEmpty()) {
-			return ResponseContainer.createTextResponse(400, "word and word2 must not be empty!");
+			return createError("word and word2 must not be empty!");
 		}
 		SandhiMerge sm = new SandhiMerge();
 		String json = "";
@@ -30,7 +33,7 @@ public class SandhiMergeHandler extends AbstractHandler {
 		JObject jsonData = new JObject();
 		JObject pjson = WordConverter.toJObject(json);
 		jsonData.add("success", pjson);
-		ResponseContainer rc = ResponseContainer.createJSONResponse(0, jsonData);
+		ResponseContainer rc = ResponseContainer.createJSONResponse(jsonData);
 		return rc;
 	}
 

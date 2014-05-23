@@ -1,15 +1,17 @@
 package palilemmatizingserver.handler;
 
+
 import palilemmatizingserver.AppRuntime;
 import palilemmatizingserver.handler.helper.RestrictGetter;
-import de.general.jettyserver.ClientRequest;
-import de.general.jettyserver.ResponseContainer;
+import de.general.jettyserver.*;
 import de.general.json.JObject;
 import de.general.log.ILogInterface;
 import de.unitrier.daalft.pali.morphology.MorphologyAnalyzer;
 import de.unitrier.daalft.pali.tools.WordConverter;
 
-public class AnalyzerHandler extends AbstractHandler {
+
+public class AnalyzerHandler extends AbstractHandler
+{
 
 	@Override
 	public ResponseContainer processRequest(AppRuntime ar,
@@ -30,7 +32,7 @@ public class AnalyzerHandler extends AbstractHandler {
 		JObject jsonData = new JObject();
 		JObject pjson = WordConverter.toJObject(json);
 		jsonData.add("success", pjson);
-		ResponseContainer rc = ResponseContainer.createJSONResponse(0, jsonData);
+		ResponseContainer rc = ResponseContainer.createJSONResponse(jsonData);
 		return rc;
 	}
 }

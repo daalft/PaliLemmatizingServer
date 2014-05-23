@@ -1,11 +1,12 @@
 package palilemmatizingserver.handler;
 
+
 import palilemmatizingserver.AppRuntime;
-import de.general.jettyserver.ClientRequest;
-import de.general.jettyserver.IRequestHandler;
-import de.general.jettyserver.ResponseContainer;
+import de.general.jettyserver.*;
 import de.general.log.ILogInterface;
 import de.unitrier.daalft.pali.ngram.NGramScorer;
+
+
 /**
  * Handles incoming client requests
  * <p>
@@ -17,19 +18,19 @@ import de.unitrier.daalft.pali.ngram.NGramScorer;
  * @author Work
  *
  */
-public class PaliRequestHandler implements IRequestHandler<AppRuntime> {
+public class PaliRequestHandler extends AbstractHandler
+{
 
 	@Override
 	public ResponseContainer processRequest(AppRuntime appRuntime,
 			ClientRequest requestWrapper, ILogInterface logger) throws Exception {
 		String word = requestWrapper.getRequestParameter("word");
 		if (word == null || word.isEmpty()) {
-			// 400 - Client Error - Bad Request
-			return ResponseContainer.createTextResponse(400, "No word provided!");
+			return createError("Parameter \"word\" is missing or empty!");
 		}
 		boolean isPali = NGramScorer.getInstance().testHypothesis(word, "pi");
 		// 422 - Client Error - Unprocessable Entity
-		if (!isPali) return ResponseContainer.createTextResponse(422, "Not a valid Pali word!");
+		if (!isPali) return createError("Not a valid Pali word!");
 		return new HandlerStrategyManager().getHandler(requestWrapper.getRequestPath())
 				.processRequest(appRuntime, requestWrapper, logger);
 	}

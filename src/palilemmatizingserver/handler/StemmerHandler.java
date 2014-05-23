@@ -21,14 +21,14 @@ public class StemmerHandler extends AbstractHandler {
 		String wc = rg.get("wc", request);
 		String json = "";
 		try {
-			json = WordConverter.toJSONStringStemmer(word,wcs.stem(word,wc));
+			json = WordConverter.toJSONStringStemmer(word, wcs.stem(word, wc));
 		} catch (Exception e) {
 			return createError(e.getMessage());
 		}
 		JObject jsonData = new JObject();
 		JObject pjson = WordConverter.toJObject(json);
 		jsonData.add("success", pjson);
-		ResponseContainer rc = ResponseContainer.createJSONResponse(0, jsonData);
+		ResponseContainer rc = ResponseContainer.createJSONResponse(jsonData);
 		return rc;
 	}
 

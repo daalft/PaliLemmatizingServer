@@ -26,7 +26,7 @@ public class SandhiSplitHandler extends AbstractHandler {
 		JObject jsonData = new JObject();
 		JObject pjson = WordConverter.toJObject(json);
 		jsonData.add("success", pjson);
-		ResponseContainer rc = ResponseContainer.createJSONResponse(0, jsonData);
+		ResponseContainer rc = ResponseContainer.createJSONResponse(jsonData);
 		return rc;
 	}
 
