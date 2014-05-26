@@ -49,11 +49,7 @@ public class GeneratorHandler extends AbstractHandler
 
 		// ----
 
-		JObject jsonData = new JObject();
-		JObject pjson = (JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", constructedWords));
-		jsonData.add("success", pjson);
-		ResponseContainer rc = ResponseContainer.createJSONResponse(jsonData);
-		return rc;
+		return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", constructedWords)));
 	}
 
 }
