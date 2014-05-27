@@ -65,7 +65,7 @@ public class ConverterWordFormGeneration extends AbstractFormatConverter
 			ret2.add(paradigmValue, formsArray);
 
 			for (ConstructedWord cw : words) {
-				formsArray.add(__toJObject(cw));
+				formsArray.add(__toJObject(cw.clone()));
 			}
 		}
 
@@ -78,7 +78,7 @@ public class ConverterWordFormGeneration extends AbstractFormatConverter
 
 		for (int i = 0; i < inputList.size(); i++) {
 			ConstructedWord cw = inputList.get(i);
-			String value = cw.getInfo().getFeature(featureName);
+			String value = cw.getFeatureSet().getFeature(featureName);
 
 			ArrayList<ConstructedWord> list = ret.get(value);
 			if (list == null) {
@@ -96,7 +96,7 @@ public class ConverterWordFormGeneration extends AbstractFormatConverter
 		JObject ret = new JObject();
 
 		ret.add("word", new JValue(cw.getWord()));
-		for (Feature f : cw.getInfo()) {
+		for (Feature f : cw.getFeatureSet()) {
 			String key = f.getKey();
 			if (key.equals("paradigm")) continue;
 			String value = f.getValue();
