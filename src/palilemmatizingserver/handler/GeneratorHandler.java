@@ -8,9 +8,7 @@ import palilemmatizingserver.handler.helper.RestrictGetter;
 import de.general.jettyserver.*;
 import de.general.json.JObject;
 import de.general.log.ILogInterface;
-import de.unitrier.daalft.pali.morphology.MorphologyGenerator;
 import de.unitrier.daalft.pali.morphology.element.*;
-import de.unitrier.daalft.pali.tools.WordConverter;
 
 
 public class GeneratorHandler extends AbstractHandler
@@ -41,14 +39,15 @@ public class GeneratorHandler extends AbstractHandler
 
 		// ----
 
-		MorphologyGenerator mg = new MorphologyGenerator();
-		List<ConstructedWord> constructedWords = mg.generate(word, wc, opt);
+		
+		List<ConstructedWord> constructedWords = ar.getMorphologyGenerator().generate(word, wc, opt);
+				
 		if ((constructedWords == null) || (constructedWords.size() == 0)) {
 			return createError("No word forms generated!");
 		}
 
 		// ----
-
+		
 		return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", constructedWords)));
 	}
 

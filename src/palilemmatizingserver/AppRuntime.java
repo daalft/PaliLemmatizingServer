@@ -5,7 +5,7 @@ import de.general.jettyserver.*;
 import de.general.cfg.*;
 import de.general.jettyserver.*;
 import de.general.log.*;
-
+import de.unitrier.daalft.pali.morphology.MorphologyGenerator;
 import palilemmatizingserver.handler.*;
 import palilemmatizingserver.handler.conv.*;
 
@@ -30,6 +30,8 @@ public class AppRuntime implements IAppRuntime
 	IIPAddressFilter ipAddressFilter;
 
 	FormatConverterManager formatConverterManager;
+	
+	MorphologyGenerator mg;
 
 	////////////////////////////////////////////////////////////////
 	// Constructors
@@ -68,6 +70,8 @@ public class AppRuntime implements IAppRuntime
 
 		formatConverterManager = new FormatConverterManager();
 		formatConverterManager.register(ConverterWordFormGeneration.class);
+		
+		mg = new MorphologyGenerator();
 	}
 
 	@Override
@@ -85,6 +89,10 @@ public class AppRuntime implements IAppRuntime
 	public FormatConverterManager getFormatConverterManager()
 	{
 		return formatConverterManager;
+	}
+
+	public MorphologyGenerator getMorphologyGenerator() {
+		return mg;
 	}
 
 }
