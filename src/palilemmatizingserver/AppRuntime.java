@@ -5,9 +5,15 @@ import de.general.jettyserver.*;
 import de.general.cfg.*;
 import de.general.jettyserver.*;
 import de.general.log.*;
-import de.unitrier.daalft.pali.morphology.MorphologyGenerator;
+
+import de.unitrier.daalft.pali.morphology.paradigm.*;
+
 import palilemmatizingserver.handler.*;
 import palilemmatizingserver.handler.conv.*;
+
+import de.unitrier.daalft.pali.morphology.*;
+import de.unitrier.daalft.pali.phonology.*;
+
 
 /**
  *
@@ -31,7 +37,12 @@ public class AppRuntime implements IAppRuntime
 
 	FormatConverterManager formatConverterManager;
 	
-	MorphologyGenerator mg;
+	MorphologyGenerator morphologyGenerator;
+	WordclassStemmer wordclassStemmer;
+	SandhiSplit defaultSandhiSplitter;
+	SandhiMerge sandhiMerge;
+	Lemmatizer lemmatizer;
+	MorphologyAnalyzer morphologyAnalyzer;
 
 	////////////////////////////////////////////////////////////////
 	// Constructors
@@ -71,7 +82,18 @@ public class AppRuntime implements IAppRuntime
 		formatConverterManager = new FormatConverterManager();
 		formatConverterManager.register(ConverterWordFormGeneration.class);
 		
-		mg = new MorphologyGenerator();
+		// read paragigm configuration
+
+		ParadigmAccessor pa = new ParadigmAccessor();
+
+		// initialize functional classes
+
+		morphologyGenerator = new MorphologyGenerator(pa);
+		wordclassStemmer = new WordclassStemmer(pa);
+		defaultSandhiSplitter = new SandhiSplit();	// initialize with unlimited splitting depth
+		sandhiMerge = new SandhiMerge();
+		lemmatizer = new Lemmatizer(pa);
+		morphologyAnalyzer = new MorphologyAnalyzer(pa);
 	}
 
 	@Override
@@ -86,13 +108,41 @@ public class AppRuntime implements IAppRuntime
 		return cfg.getPort();
 	}
 
+	////////////////////////////////////////////////////////////////
+
+	public MorphologyAnalyzer getMorphologyAnalyzer()
+	{
+		return morphologyAnalyzer;
+	}
+
 	public FormatConverterManager getFormatConverterManager()
 	{
 		return formatConverterManager;
 	}
 
-	public MorphologyGenerator getMorphologyGenerator() {
-		return mg;
+	public MorphologyGenerator getMorphologyGenerator()
+	{
+		return morphologyGenerator;
+	}
+
+	public WordclassStemmer getWordclassStemmer()
+	{
+		return wordclassStemmer;
+	}
+
+	public SandhiSplit getDefaultSandhiSplitter()
+	{
+		return defaultSandhiSplitter;
+	}
+
+	public SandhiMerge getSandhiMerger()
+	{
+		return sandhiMerge;
+	}
+
+	public Lemmatizer getLemmatizer()
+	{
+		return lemmatizer;
 	}
 
 }

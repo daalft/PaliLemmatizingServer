@@ -1,7 +1,6 @@
 package palilemmatizingserver.handler;
 
 import palilemmatizingserver.AppRuntime;
-import palilemmatizingserver.handler.helper.RestrictGetter;
 import de.general.jettyserver.ClientRequest;
 import de.general.jettyserver.ResponseContainer;
 import de.general.json.JObject;
@@ -15,21 +14,28 @@ public class StemmerHandler extends AbstractHandler {
 	public ResponseContainer processRequest(AppRuntime ar,
 			ClientRequest request, ILogInterface log) throws Exception {
 		log.info("Invoking stemmer");
-		RestrictGetter rg = new RestrictGetter();
-		WordclassStemmer wcs = new WordclassStemmer();
+
+		// ----------------------------------------------------------------
+		// process parameters
+
 		String word = request.getRequestParameter("word");
-		String wc = rg.get("wc", request);
-		String json = "";
+		String wc = getStrPropertyFromParamJSON(request, "restrict", "wc");
+
+		// ----------------------------------------------------------------
+		// stem
+
+		WordclassStemmer wcs = ar.getWordclassStemmer();
+		String json;
 		try {
 			json = WordConverter.toJSONStringStemmer(word, wcs.stem(word, wc));
 		} catch (Exception e) {
-			return createError(e.getMessage());
+			return createError(e);
 		}
-		JObject jsonData = new JObject();
-		JObject pjson = WordConverter.toJObject(json);
-		jsonData.add("success", pjson);
-		ResponseContainer rc = ResponseContainer.createJSONResponse(jsonData);
-		return rc;
+		
+		// ----------------------------------------------------------------
+		// create response
+		
+		return createSuccessResponse(WordConverter.toJObject(json));
 	}
 
 }

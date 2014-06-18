@@ -2,7 +2,6 @@ package palilemmatizingserver.handler;
 
 
 import palilemmatizingserver.AppRuntime;
-import palilemmatizingserver.handler.helper.RestrictGetter;
 import de.general.jettyserver.*;
 import de.general.json.JObject;
 import de.general.log.ILogInterface;
@@ -17,24 +16,29 @@ public class LemmatizerHandler extends AbstractHandler
 	public ResponseContainer processRequest(AppRuntime ar,
 			ClientRequest request, ILogInterface log) throws Exception {
 		log.info("Invoking lemmatizer");
-		RestrictGetter rg = new RestrictGetter();
+
+		// ----------------------------------------------------------------
+		// process parameters
+
 		String word = request.getRequestParameter("word");
 		// opt param: word class
-		String wc = rg.get("wc", request);
-		Lemmatizer l = new Lemmatizer();
+		String wc = getStrPropertyFromParamJSON(request, "restrict", "wc");
+
+		// ----------------------------------------------------------------
+		// lemmatize
+		
+		Lemmatizer l = ar.getLemmatizer();
 		String json = "";
 		try {
-			json = l.lemmatizeWithDictionary(word, wc);
+			json = l.lemmatizeWithDictionary(log, word, wc);
 		} catch (Exception e) {
-			return createError(e.getMessage());
+			return createError(e);
 		}
 		
-		JObject jsonData = new JObject();
-		JObject pjson = WordConverter.toJObject(json);
-		jsonData.add("success", pjson);
-		ResponseContainer rc = ResponseContainer.createJSONResponse(jsonData);
-		return rc;
+		// ----------------------------------------------------------------
+		// create response
 		
+		return createSuccessResponse(WordConverter.toJObject(json));
 	}
 
 }

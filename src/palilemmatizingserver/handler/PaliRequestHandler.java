@@ -21,18 +21,32 @@ import de.unitrier.daalft.pali.ngram.NGramScorer;
 public class PaliRequestHandler extends AbstractHandler
 {
 
+	private HandlerStrategyManager strategy;
+
+	public PaliRequestHandler()
+	{
+		strategy = new HandlerStrategyManager();
+	}
+
 	@Override
 	public ResponseContainer processRequest(AppRuntime appRuntime,
-			ClientRequest requestWrapper, ILogInterface logger) throws Exception {
-		String word = requestWrapper.getRequestParameter("word");
-		if (word == null || word.isEmpty()) {
-			return createError("Parameter \"word\" is missing or empty!");
+			ClientRequest requestWrapper, ILogInterface logger) throws Exception
+	{
+		try {
+			// verify basic arguments
+
+			verifyParamStrPali(requestWrapper, "word");
+
+			// delegate processing to a dedicated handler instance
+
+			AbstractHandler selectedHandler = strategy.getHandler(requestWrapper.getRequestPath(), logger);
+			return selectedHandler.processRequest(appRuntime, requestWrapper, logger);
+
+		} catch (Exception e) {
+			// some unexpected error occurred: return error
+
+			return createError(e);
 		}
-		boolean isPali = NGramScorer.getInstance().testHypothesis(word, "pi");
-		// 422 - Client Error - Unprocessable Entity
-		if (!isPali) return createError("Not a valid Pali word!");
-		return new HandlerStrategyManager().getHandler(requestWrapper.getRequestPath())
-				.processRequest(appRuntime, requestWrapper, logger);
 	}
 
 }

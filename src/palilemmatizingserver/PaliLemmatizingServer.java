@@ -8,24 +8,20 @@ import de.general.util.*;
 
 
 /**
- *
- * @author knauth
+ * This class contains the main startup code for the server.
  */
 public class PaliLemmatizingServer
 {
 
-	private static class MyServer extends JettyServer<AppRuntime>
-	{
-		public MyServer() throws Exception
-		{
-			super(AppRuntime.class);
-		}
-	}
-
     public static void main(String[] args) throws Exception
     {
+		// construct the server; while doing this the AppRuntime-object will be created and initialized automatically.
 		MyServer server = new MyServer();
+
+		// add request handlers
 		server.add(new PaliRequestHandler());
+
+		// start the server
 		server.start();
     }
 

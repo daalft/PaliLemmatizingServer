@@ -14,20 +14,28 @@ public class SandhiSplitHandler extends AbstractHandler {
 	public ResponseContainer processRequest(AppRuntime ar,
 			ClientRequest request, ILogInterface log) throws Exception {
 		log.info("Invoking sandhi splitter");
+
+		// ----------------------------------------------------------------
+		// process parameters
+
 		String word = request.getRequestParameter("word");
-		SandhiSplit ss = new SandhiSplit();
-		String json = "";
+
+		// ----------------------------------------------------------------
+		// split
+
+		String json;
+		SandhiSplit ss = ar.getDefaultSandhiSplitter();
 		// only the conversion can throw an error
 		try {
 			json = WordConverter.toJSONStringSplitter(word, ss.split(word, 0));
-		} catch (Error e) {
-			return createError(e.getMessage());
+		} catch (Exception e) {
+			return createError(e);
 		}
-		JObject jsonData = new JObject();
-		JObject pjson = WordConverter.toJObject(json);
-		jsonData.add("success", pjson);
-		ResponseContainer rc = ResponseContainer.createJSONResponse(jsonData);
-		return rc;
+		
+		// ----------------------------------------------------------------
+		// create response
+		
+		return createSuccessResponse(WordConverter.toJObject(json));
 	}
 
 }

@@ -2,7 +2,6 @@ package palilemmatizingserver.handler;
 
 
 import palilemmatizingserver.AppRuntime;
-import palilemmatizingserver.handler.helper.RestrictGetter;
 import de.general.jettyserver.*;
 import de.general.json.JObject;
 import de.general.log.ILogInterface;
@@ -15,24 +14,31 @@ public class AnalyzerHandler extends AbstractHandler
 
 	@Override
 	public ResponseContainer processRequest(AppRuntime ar,
-			ClientRequest request, ILogInterface log) throws Exception {
+			ClientRequest request, ILogInterface log) throws Exception
+	{
 		log.info("Invoking analyzer");
-		RestrictGetter rg = new RestrictGetter();
+
+		// ----------------------------------------------------------------
+		// process parameters
+
 		String word = request.getRequestParameter("word");
-		String wc = rg.get("wc", request);
-		MorphologyAnalyzer ma = new MorphologyAnalyzer();
-		String json = "";
+		String wc = getStrPropertyFromParamJSON(request, "restrict", "wc");
 		
+		// ----------------------------------------------------------------
+		// analyze
+		
+		String json;
+		MorphologyAnalyzer ma = ar.getMorphologyAnalyzer();
 		try {
-			json = ma.analyzeWithDictionary(word, wc);
+			json = ma.analyzeWithDictionary(log, word, wc);
 		} catch (Exception e) {
-			return createError(e.getMessage());
+			return createError(e);
 		}
 		
-		JObject jsonData = new JObject();
-		JObject pjson = WordConverter.toJObject(json);
-		jsonData.add("success", pjson);
-		ResponseContainer rc = ResponseContainer.createJSONResponse(jsonData);
-		return rc;
+		// ----------------------------------------------------------------
+		// create response
+		
+		return createSuccessResponse(WordConverter.toJObject(json));
 	}
+
 }
