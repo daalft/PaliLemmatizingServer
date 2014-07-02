@@ -42,23 +42,50 @@ public class GeneratorHandler extends AbstractHandler
 		String word = request.getRequestParameter("word");
 		//String json = request.getRequestParameter("restrict");
 		
-		String wc = getStrPropertyFromParamJSON(request, "restrict", "wc");
-		
-		String opt = "";
-		if (wc != null) {
-			if (wc.equals("noun")) {
-				opt = getStrPropertyFromParamJSON(request, "restrict", "gender");
-			} else
-			if (wc.equals("verb")) {
-				opt = getStrPropertyFromParamJSON(request, "restrict", "declension");
+		/*	PSEUDOCODE
+		JObject gramGrpData = getParamJObject(request, "gramGrp");
+		if (gramGrpData == null) {
+			// TODO: perform dictionary request
+			DictWord dw = ar.getDictionary().getWordByLemma(word);
+			if (dw == null) {
+				return throw new Exception("Lemma not found: " + word);
+			} else {
+				gramGrpData = dw.getPropertyObject("gramGrp");
 			}
 		}
 
+		if (gramGrpData == null) {
+			if (!paramBuildFormsAnyway) {
+				throw Exception("No information about how to build forms!");
+			}
+		}
+		*/
+
+		String[] wordClasses = getStrArrayPropertyFromParamJSON(request, "restrict", "pos");
+
 		// ----------------------------------------------------------------
 		// generate words
-		
-		List<ConstructedWord> constructedWords = ar.getMorphologyGenerator().generate(log, word, wc, opt);
-				
+
+		List<ConstructedWord> constructedWords;
+
+		if (wordClasses == null) {
+			constructedWords = ar.getMorphologyGenerator().generate(log, word, null, opt));
+		} else {
+			constructedWords = new List<ConstructedWord>();
+			for (String wc : wordClasses) {
+				String opt = "";
+				if (wc != null) {
+					if (wc.equals("noun")) {
+						opt = getStrPropertyFromParamJSON(request, "restrict", "gender");
+					} else
+					if (wc.equals("verb")) {
+						opt = getStrPropertyFromParamJSON(request, "restrict", "declension");
+					}
+				}
+				constructedWords.add(ar.getMorphologyGenerator().generate(log, word, wc, opt));
+			}
+		}
+			
 		if ((constructedWords == null) || (constructedWords.size() == 0)) {
 			return createError("No word forms generated!");
 		}
