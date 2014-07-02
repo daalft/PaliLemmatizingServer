@@ -22,7 +22,7 @@ public class AnalyzerHandler extends AbstractHandler
 		// process parameters
 
 		String word = request.getRequestParameter("word");
-		String wc = getStrPropertyFromParamJSON(request, "restrict", "wc");
+		String pos = getStrPropertyFromParamJSON(request, "restrict", "pos");
 		
 		// ----------------------------------------------------------------
 		// analyze
@@ -30,7 +30,7 @@ public class AnalyzerHandler extends AbstractHandler
 		String json;
 		MorphologyAnalyzer ma = ar.getMorphologyAnalyzer();
 		try {
-			json = ma.analyzeWithDictionary(log, word, wc);
+			json = ma.analyzeWithDictionary(log, word, pos);
 		} catch (Exception e) {
 			return createError(e);
 		}

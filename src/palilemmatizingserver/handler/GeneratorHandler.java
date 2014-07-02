@@ -42,14 +42,14 @@ public class GeneratorHandler extends AbstractHandler
 		String word = request.getRequestParameter("word");
 		//String json = request.getRequestParameter("restrict");
 		
-		String wc = getStrPropertyFromParamJSON(request, "restrict", "wc");
+		String pos = getStrPropertyFromParamJSON(request, "restrict", "pos");
 		
 		String opt = "";
-		if (wc != null) {
-			if (wc.equals("noun")) {
+		if (pos != null) {
+			if (pos.equals("noun")) {
 				opt = getStrPropertyFromParamJSON(request, "restrict", "gender");
 			} else
-			if (wc.equals("verb")) {
+			if (pos.equals("verb")) {
 				opt = getStrPropertyFromParamJSON(request, "restrict", "declension");
 			}
 		}
@@ -57,7 +57,7 @@ public class GeneratorHandler extends AbstractHandler
 		// ----------------------------------------------------------------
 		// generate words
 		
-		List<ConstructedWord> constructedWords = ar.getMorphologyGenerator().generate(log, word, wc, opt);
+		List<ConstructedWord> constructedWords = ar.getMorphologyGenerator().generate(log, word, pos, opt);
 				
 		if ((constructedWords == null) || (constructedWords.size() == 0)) {
 			return createError("No word forms generated!");

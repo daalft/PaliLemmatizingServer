@@ -19,7 +19,7 @@ public class StemmerHandler extends AbstractHandler {
 		// process parameters
 
 		String word = request.getRequestParameter("word");
-		String wc = getStrPropertyFromParamJSON(request, "restrict", "wc");
+		String pos = getStrPropertyFromParamJSON(request, "restrict", "pos");
 
 		// ----------------------------------------------------------------
 		// stem
@@ -27,7 +27,7 @@ public class StemmerHandler extends AbstractHandler {
 		WordclassStemmer wcs = ar.getWordclassStemmer();
 		String json;
 		try {
-			json = WordConverter.toJSONStringStemmer(word, wcs.stem(word, wc));
+			json = WordConverter.toJSONStringStemmer(word, wcs.stem(word, pos));
 		} catch (Exception e) {
 			return createError(e);
 		}

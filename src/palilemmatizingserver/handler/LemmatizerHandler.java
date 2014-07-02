@@ -22,7 +22,7 @@ public class LemmatizerHandler extends AbstractHandler
 
 		String word = request.getRequestParameter("word");
 		// opt param: word class
-		String wc = getStrPropertyFromParamJSON(request, "restrict", "wc");
+		String pos = getStrPropertyFromParamJSON(request, "restrict", "pos");
 
 		// ----------------------------------------------------------------
 		// lemmatize
@@ -30,7 +30,7 @@ public class LemmatizerHandler extends AbstractHandler
 		Lemmatizer l = ar.getLemmatizer();
 		String json = "";
 		try {
-			json = l.lemmatizeWithDictionary(log, word, wc);
+			json = l.lemmatizeWithDictionary(log, word, pos);
 		} catch (Exception e) {
 			return createError(e);
 		}
