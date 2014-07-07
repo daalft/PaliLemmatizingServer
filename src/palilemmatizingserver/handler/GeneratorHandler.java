@@ -46,7 +46,9 @@ public class GeneratorHandler extends AbstractHandler
 		
 		String word = request.getRequestParameter("word");
 		
-		JObject gramGrp = getParamJObject(request, "gramGrp");
+		JObject gramGrp = WordConverter.toJObject("{gramGrp:"+ 
+				getParamJObject(request, "gramGrp").toJSON()
+				+"}");
 		
 		if (gramGrp == null) {
 			JObject[] entries = ar.getLexiconAdapter().getLemmaEntriesAsJObjectArray(word);
@@ -63,6 +65,7 @@ public class GeneratorHandler extends AbstractHandler
 				for (JObject entry : entries) {
 					try {
 						innerGramGrp = WordConverter.toJObject("{"+entry.getProperty("gramGrp").toJSON()+"}");
+						log.debug(""+entry.getProperty("gramGrp"));
 						prematureResult.addAll(ar.getMorphologyGenerator().generate(log, word, innerGramGrp));
 					} catch (Exception e) {
 						log.warn("Could not find grammar node");
