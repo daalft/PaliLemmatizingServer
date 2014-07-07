@@ -8,6 +8,7 @@ import de.general.jettyserver.*;
 import de.general.json.JObject;
 import de.general.log.ILogInterface;
 import de.unitrier.daalft.pali.morphology.element.*;
+import de.unitrier.daalft.pali.tools.WordConverter;
 
 
 public class GeneratorHandler extends AbstractHandler
@@ -39,26 +40,75 @@ public class GeneratorHandler extends AbstractHandler
 		// ----------------------------------------------------------------
 		// process parameters
 
+		boolean bBuildFormsAnyway =
+				this.getStrPropertyFromParamJSON(request, "additional", "buildAnyway") != null &&
+						this.getStrPropertyFromParamJSON(request, "additional", "buildAnyway").equals("true");
+		
 		String word = request.getRequestParameter("word");
-		//String json = request.getRequestParameter("restrict");
 		
-		String pos = getStrPropertyFromParamJSON(request, "restrict", "pos");
+		JObject gramGrp = getParamJObject(request, "gramGrp");
 		
-		String opt = "";
-		if (pos != null) {
-			if (pos.equals("noun")) {
-				opt = getStrPropertyFromParamJSON(request, "restrict", "gender");
-			} else
-			if (pos.equals("verb")) {
-				opt = getStrPropertyFromParamJSON(request, "restrict", "declension");
+		if (gramGrp == null) {
+			JObject[] entries = ar.getLexiconAdapter().getLemmaEntriesAsJObjectArray(word);
+			if (entries == null || entries.length == 0 && !bBuildFormsAnyway) {
+				log.error("Could not find " + word + " in the dictionary!");
+				throw new Exception("Could not find " + word + " in the dictionary");
+			}
+			// Premature return block
+			else if (entries.length > 1) {
+				if (!bBuildFormsAnyway)
+					log.debug("More than one dictionary entry found!");
+				JObject innerGramGrp = null;
+				List<ConstructedWord> prematureResult = new ArrayList<ConstructedWord>();
+				for (JObject entry : entries) {
+					try {
+						innerGramGrp = WordConverter.toJObject("{"+entry.getProperty("gramGrp").toJSON()+"}");
+						prematureResult.addAll(ar.getMorphologyGenerator().generate(log, word, innerGramGrp));
+					} catch (Exception e) {
+						log.warn("Could not find grammar node");
+					}
+				}
+				return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", prematureResult)));
+			}
+			// End premature return block
+			try {
+				gramGrp = WordConverter.toJObject("{"+entries[0].getProperty("gramGrp").toJSON()+"}");
+			} catch (Exception e) {
+				log.warn("Entry does not contain grammar node");
 			}
 		}
+		
+		if (gramGrp == null) {
+			if (!bBuildFormsAnyway) {
+				throw new Exception("No information about how to build forms!");
+			}
+		}
+		
+		String[] restrictWordClasses = getStrArrayPropertyFromParamJSON(request, "restrict", "pos");
 
 		// ----------------------------------------------------------------
 		// generate words
-		
-		List<ConstructedWord> constructedWords = ar.getMorphologyGenerator().generate(log, word, pos, opt);
-				
+
+		List<ConstructedWord> constructedWords;
+
+		if (restrictWordClasses == null) {
+			constructedWords = ar.getMorphologyGenerator().generate(log, word, gramGrp);
+		} else {
+			constructedWords = new ArrayList<ConstructedWord>();
+			for (String wc : restrictWordClasses) {
+				String opt = "";
+				if (wc != null) {
+					if (wc.equals("noun")) {
+						opt = getStrPropertyFromParamJSON(request, "restrict", "gender");
+					} else
+					if (wc.equals("verb")) {
+						opt = getStrPropertyFromParamJSON(request, "restrict", "declension");
+					}
+				}
+				constructedWords.addAll(ar.getMorphologyGenerator().generate(log, word, gramGrp));
+			}
+		}
+			
 		if ((constructedWords == null) || (constructedWords.size() == 0)) {
 			return createError("No word forms generated!");
 		}

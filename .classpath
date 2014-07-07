@@ -32,7 +32,6 @@
 	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-xml-9.1.4.v20140401.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/lib.zip"/>
 	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/servlet-api-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/LibJettyServer/dist/LibJettyServer.jar" sourcepath="C:/Users/Work/Downloads/Libraries/LibJettyServer/src"/>
 	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/LibSimpleJSON/dist/LibSimpleJSON.jar" sourcepath="C:/Users/Work/Downloads/Libraries/LibSimpleJSON/src"/>
 	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/LibUtils/dist/LibUtils.jar" sourcepath="C:/Users/Work/Downloads/Libraries/LibUtils/src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PaliNLP2"/>
@@ -40,5 +39,6 @@
 	<classpathentry kind="lib" path="/PaliNLP2/data/extlib/jackson-annotations-2.2.3.jar"/>
 	<classpathentry kind="lib" path="/PaliNLP2/data/extlib/jackson-core-2.2.3.jar"/>
 	<classpathentry kind="lib" path="/PaliNLP2/data/extlib/jackson-databind-2.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Work/Downloads/2014-05-23_LibJettyServer.jar" sourcepath="C:/Users/Work/Downloads/2014-05-23_LibJettyServer_srcJava.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

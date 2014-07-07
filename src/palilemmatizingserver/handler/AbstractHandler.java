@@ -60,6 +60,30 @@ public abstract class AbstractHandler implements IRequestHandler<AppRuntime>
 		return sVal;
 	}
 
+	public JObject getParamJObject(ClientRequest requestWrapper, String name) throws Exception
+	{
+		String sRestrict = requestWrapper.getRequestParameter(name);
+		if (sRestrict == null) return null;
+
+		JObject jo = WordConverter.toJObject(sRestrict);
+		return jo;
+	}
+
+	public String[] getStrArrayPropertyFromParamJSON(ClientRequest requestWrapper, String name, String property) throws Exception
+	{
+		String sRestrict = requestWrapper.getRequestParameter(name);
+		if (sRestrict == null) return null;
+
+		JObject jo = WordConverter.toJObject(sRestrict);
+		JToken val = jo.getValue(property);
+		if (val == null) return null;
+
+		String sVal = val.toString();
+		if (sVal.isEmpty()) return null;
+
+		return sVal.split(",");
+	}
+
 	public ResponseContainer createError(String msg) throws Exception
 	{
 		JObject jsonData = new JObject();

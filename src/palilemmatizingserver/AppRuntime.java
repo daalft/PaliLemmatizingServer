@@ -5,12 +5,10 @@ import de.general.jettyserver.*;
 import de.general.cfg.*;
 import de.general.jettyserver.*;
 import de.general.log.*;
-
+import de.unitrier.daalft.pali.lexicon.LexiconAdapter;
 import de.unitrier.daalft.pali.morphology.paradigm.*;
-
 import palilemmatizingserver.handler.*;
 import palilemmatizingserver.handler.conv.*;
-
 import de.unitrier.daalft.pali.morphology.*;
 import de.unitrier.daalft.pali.phonology.*;
 
@@ -43,7 +41,8 @@ public class AppRuntime implements IAppRuntime
 	SandhiMerge sandhiMerge;
 	Lemmatizer lemmatizer;
 	MorphologyAnalyzer morphologyAnalyzer;
-
+	LexiconAdapter lexiconAdapter;
+	
 	////////////////////////////////////////////////////////////////
 	// Constructors
 	////////////////////////////////////////////////////////////////
@@ -94,6 +93,11 @@ public class AppRuntime implements IAppRuntime
 		sandhiMerge = new SandhiMerge();
 		lemmatizer = new Lemmatizer(pa);
 		morphologyAnalyzer = new MorphologyAnalyzer(pa);
+		try {
+		lexiconAdapter = new LexiconAdapter();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -145,4 +149,7 @@ public class AppRuntime implements IAppRuntime
 		return lemmatizer;
 	}
 
+	public LexiconAdapter getLexiconAdapter() {
+		return lexiconAdapter;
+	}
 }
