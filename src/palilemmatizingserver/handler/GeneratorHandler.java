@@ -45,10 +45,7 @@ public class GeneratorHandler extends AbstractHandler
 						this.getStrPropertyFromParamJSON(request, "additional", "buildAnyway").equals("true");
 		
 		String word = request.getRequestParameter("word");
-		
-		JObject gramGrp = WordConverter.toJObject("{gramGrp:"+ 
-				getParamJObject(request, "gramGrp").toJSON()
-				+"}");
+		JObject gramGrp = getParamJObject(request, "gramGrp");
 		
 		if (gramGrp == null) {
 			JObject[] entries = ar.getLexiconAdapter().getLemmaEntriesAsJObjectArray(word);
@@ -79,6 +76,9 @@ public class GeneratorHandler extends AbstractHandler
 			} catch (Exception e) {
 				log.warn("Entry does not contain grammar node");
 			}
+		} else {
+			gramGrp = WordConverter.toJObject("{gramGrp:" +
+					gramGrp.toJSON() + "}");
 		}
 		
 		if (gramGrp == null) {
