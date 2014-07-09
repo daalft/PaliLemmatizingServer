@@ -40,23 +40,19 @@ public class GeneratorHandler extends AbstractHandler
 		// ----------------------------------------------------------------
 		// process parameters
 
-		boolean bBuildFormsAnyway =
-				this.getStrPropertyFromParamJSON(request, "additional", "buildAnyway") != null &&
-						this.getStrPropertyFromParamJSON(request, "additional", "buildAnyway").equals("true");
-		
 		String word = request.getRequestParameter("word");
 		JObject gramGrp = getParamJObject(request, "gramGrp");
 		
 		if (gramGrp == null) {
 			JObject[] entries = ar.getLexiconAdapter().getLemmaEntriesAsJObjectArray(word);
-			if (entries == null || entries.length == 0 && !bBuildFormsAnyway) {
+			if (entries == null || entries.length == 0) {
 				log.error("Could not find " + word + " in the dictionary!");
-				throw new Exception("Could not find " + word + " in the dictionary");
+				return ResponseContainer.createJSONResponse(EnumError.PROCESSING, WordConverter.toJObject("{}"));
 			}
 			// Premature return block
 			else if (entries.length > 1) {
-				if (!bBuildFormsAnyway)
-					log.debug("More than one dictionary entry found!");
+				
+				log.debug("More than one dictionary entry found!");
 				JObject innerGramGrp = null;
 				List<ConstructedWord> prematureResult = new ArrayList<ConstructedWord>();
 				for (JObject entry : entries) {
@@ -79,12 +75,6 @@ public class GeneratorHandler extends AbstractHandler
 		} else {
 			gramGrp = WordConverter.toJObject("{gramGrp:" +
 					gramGrp.toJSON() + "}");
-		}
-		
-		if (gramGrp == null) {
-			if (!bBuildFormsAnyway) {
-				throw new Exception("No information about how to build forms!");
-			}
 		}
 		
 		String[] restrictWordClasses = getStrArrayPropertyFromParamJSON(request, "restrict", "pos");
