@@ -58,9 +58,11 @@ public class GeneratorHandler extends AbstractHandler
 				for (JObject entry : entries) {
 					try {
 						innerGramGrp = WordConverter.toJObject("{"+entry.getProperty("gramGrp").toJSON()+"}");
+						
 						log.debug(""+entry.getProperty("gramGrp"));
 						prematureResult.addAll(ar.getMorphologyGenerator().generate(log, word, innerGramGrp));
 					} catch (Exception e) {
+						e.printStackTrace();
 						log.warn("Could not find grammar node");
 					}
 				}

@@ -35,7 +35,7 @@ public class PaliRequestHandler extends AbstractHandler
 		try {
 			// verify basic arguments
 
-			verifyParamStrPali(requestWrapper, "word");
+			verifyParamStrPali(requestWrapper, "word", logger);
 
 			// delegate processing to a dedicated handler instance
 

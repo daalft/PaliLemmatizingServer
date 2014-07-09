@@ -5,11 +5,11 @@ import java.util.*;
 import java.io.*;
 
 import palilemmatizingserver.AppRuntime;
-
 import de.unitrier.daalft.pali.ngram.*;
 import de.general.jettyserver.*;
 import de.general.json.*;
 import de.general.jettyserver.ClientRequest;
+import de.general.log.ILogInterface;
 import de.unitrier.daalft.pali.tools.WordConverter;
 
 
@@ -25,13 +25,13 @@ public abstract class AbstractHandler implements IRequestHandler<AppRuntime>
 		return word;
 	}
 
-	public String verifyParamStrPali(ClientRequest requestWrapper, String name) throws Exception
+	public String verifyParamStrPali(ClientRequest requestWrapper, String name, ILogInterface log) throws Exception
 	{
 		String word = verifyParamStr(requestWrapper, name);
 
 		boolean isPali = NGramScorer.getInstance().testHypothesis(word, "pi");
 		// 422 - Client Error - Unprocessable Entity
-		if (!isPali) throw new Exception("Not a valid Pali word!");
+		if (!isPali) log.warn("Word " + word + " failed ngram validation.");
 
 		return word;
 	}
