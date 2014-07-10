@@ -37,9 +37,14 @@ public class AnalyzerHandler extends AbstractHandler
 			
 			// Premature return block
 			else if (gramGrps.size() > 1) {
-				List<JObject> prematureResult = new ArrayList<JObject>();
+				List<ConstructedWord> prematureResult = new ArrayList<ConstructedWord>();
 				for (JObject innerGramGrp : gramGrps) {
-					prematureResult.add(WordConverter.toJObject(ar.getMorphologyAnalyzer().analyzeWithDictionary(log, word, innerGramGrp)));
+					
+					
+					List<ConstructedWord> words = ar.getMorphologyAnalyzer().analyze(log, word);
+					
+					
+					prematureResult.addAll(words);
 				}
 				return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", prematureResult)));
 			}
