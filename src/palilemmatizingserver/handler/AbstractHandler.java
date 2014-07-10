@@ -5,6 +5,7 @@ import java.util.*;
 import java.io.*;
 
 import palilemmatizingserver.AppRuntime;
+import de.unitrier.daalft.pali.morphology.element.ConstructedWord;
 import de.unitrier.daalft.pali.ngram.*;
 import de.general.jettyserver.*;
 import de.general.json.*;
@@ -91,7 +92,7 @@ public abstract class AbstractHandler implements IRequestHandler<AppRuntime>
 		jsonData.add("error", errmsg);
 		errmsg.add("errMsg", new JValue("Error!"));
 		errmsg.add("details", new JValue(msg));
-		
+
 		return ResponseContainer.createJSONResponse(EnumError.PROCESSING, jsonData);
 	}
 
@@ -112,7 +113,7 @@ public abstract class AbstractHandler implements IRequestHandler<AppRuntime>
 		}
 
 		errmsg.add("details", a);
-		
+
 		return ResponseContainer.createJSONResponse(EnumError.PROCESSING, jsonData);
 	}
 
@@ -124,4 +125,38 @@ public abstract class AbstractHandler implements IRequestHandler<AppRuntime>
 		return rc;
 	}
 
+	public List<JObject> getGramGrpFromDictionary (String word, String collection, AppRuntime ar, ILogInterface log) throws Exception {
+		JObject gramGrp = null;
+
+		JObject[] entries = ar.getLexiconAdapter().getLemmaEntriesAsJObjectArray(word);
+		if (entries == null || entries.length == 0) {
+			log.error("Could not find " + word + " in the dictionary!");
+			return null;
+		}
+
+		else if (entries.length > 1) {
+
+			log.debug("More than one dictionary entry found!");
+			JObject innerGramGrp = null;
+			List<JObject> innerJObjects = new ArrayList<JObject>();
+			for (JObject entry : entries) {
+				try {
+					innerGramGrp = WordConverter.toJObject("{"+entry.getProperty("gramGrp").toJSON()+"}");
+
+					innerJObjects.add(innerGramGrp);
+				} catch (Exception e) {
+					
+					log.warn("Could not find grammar node");
+				}
+			}
+			return innerJObjects;
+		}
+		// End premature return block
+		try {
+			gramGrp = WordConverter.toJObject("{"+entries[0].getProperty("gramGrp").toJSON()+"}");
+		} catch (Exception e) {
+			log.warn("Entry does not contain grammar node");
+		}
+		return Collections.singletonList(gramGrp);
+	}
 }

@@ -44,36 +44,20 @@ public class GeneratorHandler extends AbstractHandler
 		JObject gramGrp = getParamJObject(request, "gramGrp");
 		
 		if (gramGrp == null) {
-			JObject[] entries = ar.getLexiconAdapter().getLemmaEntriesAsJObjectArray(word);
-			if (entries == null || entries.length == 0) {
-				log.error("Could not find " + word + " in the dictionary!");
+			List<JObject> gramGrps = this.getGramGrpFromDictionary(word, "LEMMA", ar, log);
+			if (gramGrps == null)
 				return ResponseContainer.createJSONResponse(EnumError.PROCESSING, WordConverter.toJObject("{}"));
-			}
+			
 			// Premature return block
-			else if (entries.length > 1) {
-				
-				log.debug("More than one dictionary entry found!");
-				JObject innerGramGrp = null;
+			else if (gramGrps.size() > 1) {
 				List<ConstructedWord> prematureResult = new ArrayList<ConstructedWord>();
-				for (JObject entry : entries) {
-					try {
-						innerGramGrp = WordConverter.toJObject("{"+entry.getProperty("gramGrp").toJSON()+"}");
-						
-						log.debug(""+entry.getProperty("gramGrp"));
-						prematureResult.addAll(ar.getMorphologyGenerator().generate(log, word, innerGramGrp));
-					} catch (Exception e) {
-						e.printStackTrace();
-						log.warn("Could not find grammar node");
-					}
+				for (JObject innerGramGrp : gramGrps) {
+					prematureResult.addAll(ar.getMorphologyGenerator().generate(log, word, innerGramGrp));
 				}
 				return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", prematureResult)));
 			}
 			// End premature return block
-			try {
-				gramGrp = WordConverter.toJObject("{"+entries[0].getProperty("gramGrp").toJSON()+"}");
-			} catch (Exception e) {
-				log.warn("Entry does not contain grammar node");
-			}
+			
 		} else {
 			gramGrp = WordConverter.toJObject("{gramGrp:" +
 					gramGrp.toJSON() + "}");
