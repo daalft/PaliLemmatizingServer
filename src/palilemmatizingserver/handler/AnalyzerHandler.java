@@ -6,6 +6,7 @@ import java.util.List;
 
 import palilemmatizingserver.AppRuntime;
 import de.general.jettyserver.*;
+import de.general.json.JArray;
 import de.general.json.JObject;
 import de.general.log.ILogInterface;
 import de.unitrier.daalft.pali.morphology.MorphologyAnalyzer;
@@ -46,7 +47,9 @@ public class AnalyzerHandler extends AbstractHandler
 					
 					prematureResult.addAll(words);
 				}
-				return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", prematureResult)));
+				JObject ret = (JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", prematureResult));
+				
+				return ResponseContainer.createJSONResponse(ret);
 			}
 			// End premature return block
 			
