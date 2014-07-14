@@ -45,11 +45,13 @@ public class GeneratorHandler extends AbstractHandler
 		
 		if (gramGrp == null) {
 			List<JObject> gramGrps = this.getGramGrpFromDictionary(word, "LEMMA", ar, log);
+			
+			// Pre-premature return block
 			if (gramGrps == null)
-				return ResponseContainer.createJSONResponse(EnumError.PROCESSING, WordConverter.toJObject("{}"));
+				return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json",ar.getMorphologyGenerator().generate(log, word, null))));
 			
 			// Premature return block
-			else if (gramGrps.size() > 1) {
+			if (gramGrps.size() > 1) {
 				List<ConstructedWord> prematureResult = new ArrayList<ConstructedWord>();
 				for (JObject innerGramGrp : gramGrps) {
 					prematureResult.addAll(ar.getMorphologyGenerator().generate(log, word, innerGramGrp));

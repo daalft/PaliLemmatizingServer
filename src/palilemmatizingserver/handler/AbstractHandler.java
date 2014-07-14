@@ -147,6 +147,8 @@ public abstract class AbstractHandler implements IRequestHandler<AppRuntime>
 				} catch (Exception e) {
 					
 					log.warn("Could not find grammar node");
+					log.warn("Falling back to general generation!");
+					return null;
 				}
 			}
 			return innerJObjects;
