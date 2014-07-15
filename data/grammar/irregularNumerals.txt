@@ -111,6 +111,7 @@ tīsu{paradigm=numeral, number=plural, gender=neuter, case=locative}
 =
 cattāro{paradigm=numeral, number=plural, gender=masculine, case=nominative}
 caturo{paradigm=numeral, number=plural, gender=masculine, case=nominative}
+catur{paradigm=numeral, number=plural, gender=masculine, case=nominative}
 catunnaṃ{paradigm=numeral, number=plural, gender=masculine, case=genitive}
 catunnaṃ{paradigm=numeral, number=plural, gender=masculine, case=dative}
 cattāro{paradigm=numeral, number=plural, gender=masculine, case=accusative}
