@@ -43,6 +43,16 @@ public class GeneratorHandler extends AbstractHandler
 		String word = request.getRequestParameter("word");
 		JObject gramGrp = getParamJObject(request, "gramGrp");
 		
+		// if word is (probably) word id, replace word by lookup
+		if (word.matches(".*?\\d.*?")) {
+			try {
+				word = ar.getLexiconAdapter().getLemmaById(word);
+			} catch (Exception e) {
+				log.error("Error resolving word ID " + word);
+				return this.createError("Word ID could not be resolved!");
+			}
+		}
+		
 		if (gramGrp == null) {
 			List<JObject> gramGrps = this.getGramGrpFromDictionary(word, "LEMMA", ar, log);
 			
