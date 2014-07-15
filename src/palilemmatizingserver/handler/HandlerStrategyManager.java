@@ -22,7 +22,8 @@ public class HandlerStrategyManager
 	private SandhiMergeHandler sandhiMergeHandler;
 	private SandhiSplitHandler sandhiSplitHandler;
 	private NullHandler nullHandler;
-
+	private AnalyzerNoDictionaryHandler analyzerNoDictionaryHandler;
+	
 	////////////////////////////////////////////////////////////////
 	// Constructors
 	////////////////////////////////////////////////////////////////
@@ -36,6 +37,7 @@ public class HandlerStrategyManager
 		sandhiMergeHandler = new SandhiMergeHandler();
 		sandhiSplitHandler = new SandhiSplitHandler();
 		nullHandler = new NullHandler();
+		analyzerNoDictionaryHandler = new AnalyzerNoDictionaryHandler();
 	}
 
 	////////////////////////////////////////////////////////////////
@@ -57,7 +59,8 @@ public class HandlerStrategyManager
 				return sandhiMergeHandler;
 			case "/api/json/ssplit":
 				return sandhiSplitHandler;
-			
+			case "/api/json/morphanand":
+				return analyzerNoDictionaryHandler;
 			default:
 				logger.warn("No suitable handler found for path " + path);
 				return nullHandler;
