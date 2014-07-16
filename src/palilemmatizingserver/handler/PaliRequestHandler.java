@@ -32,6 +32,8 @@ public class PaliRequestHandler extends AbstractHandler
 	public ResponseContainer processRequest(AppRuntime appRuntime,
 			ClientRequest requestWrapper, ILogInterface logger) throws Exception
 	{
+		String requestPath = requestWrapper.getRequestPath();
+
 		try {
 			// verify basic arguments
 
@@ -39,7 +41,7 @@ public class PaliRequestHandler extends AbstractHandler
 
 			// delegate processing to a dedicated handler instance
 
-			AbstractHandler selectedHandler = strategy.getHandler(requestWrapper.getRequestPath(), logger);
+			AbstractHandler selectedHandler = strategy.getHandler(requestPath, logger);
 			return selectedHandler.processRequest(appRuntime, requestWrapper, logger);
 
 		} catch (Exception e) {

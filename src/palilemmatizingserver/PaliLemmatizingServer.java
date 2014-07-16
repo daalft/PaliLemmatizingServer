@@ -20,7 +20,7 @@ public class PaliLemmatizingServer
 
 		// add request handlers
 		server.add(new PaliRequestHandler());
-
+		
 		// start the server
 		server.start();
     }
