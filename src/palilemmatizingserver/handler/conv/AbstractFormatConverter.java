@@ -1,5 +1,7 @@
 package palilemmatizingserver.handler.conv;
 
+import de.general.transliteration.ITransliterator;
+
 
 public abstract class AbstractFormatConverter
 {
@@ -26,7 +28,7 @@ public abstract class AbstractFormatConverter
 	/**
 	 * Perform conversion
 	 */
-	public abstract Object convert(Object obj);
+	public abstract Object convert(Object obj, ITransliterator t);
 
 }
 

@@ -25,19 +25,20 @@ public class AppConfiguration
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	ILogInterface defaultStdOutLogger;
-	IConfigurationLoader cfgLoder;
+	IConfigurationLoader cfgLoader;
 
 	int port;
 	String[] allowedIPAddresses;
-
+	String sandhiRuleFile;
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Constructors
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public AppConfiguration(IConfigurationLoader cfgLoder, ILogInterface defaultStdOutLogger)
+	public AppConfiguration(IConfigurationLoader cfgLoader, ILogInterface defaultStdOutLogger)
 	{
 		this.defaultStdOutLogger = defaultStdOutLogger;
-		this.cfgLoder = cfgLoder;
+		this.cfgLoader = cfgLoader;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,12 +47,13 @@ public class AppConfiguration
 
 	public void load() throws Exception
 	{
-		AbstractConfigurationReader r = cfgLoder.loadConfiguration(defaultStdOutLogger);
+		AbstractConfigurationReader r = cfgLoader.loadConfiguration(defaultStdOutLogger);
 
 		// extract configuration data
 
 		port = r.getPortE("Server", "serverPort");
 		allowedIPAddresses = r.getStringList("Server", "allowedIPAddresses");
+		sandhiRuleFile = r.getString("SandhiRules", "filename");
 	}
 
 	public String[] getAllowedIPAddresses()
@@ -62,6 +64,10 @@ public class AppConfiguration
 	public int getPort()
 	{
 		return port;
+	}
+
+	public String getSandhiRuleFile() {
+		return sandhiRuleFile;
 	}
 
 }

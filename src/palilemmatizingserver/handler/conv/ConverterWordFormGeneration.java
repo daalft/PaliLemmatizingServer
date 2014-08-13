@@ -7,6 +7,7 @@ import org.eclipse.jetty.util.log.Log;
 
 import de.cl.dictclient.DictWord;
 import de.general.json.*;
+import de.general.transliteration.ITransliterator;
 import de.unitrier.daalft.pali.lexicon.*;
 import de.unitrier.daalft.pali.morphology.element.*;
 import de.unitrier.daalft.pali.phonology.element.*;
@@ -46,7 +47,7 @@ public class ConverterWordFormGeneration extends AbstractFormatConverter
 		return "json";
 	}
 
-	public Object convert(Object obj)
+	public Object convert(Object obj, ITransliterator t)
 	{
 		List<ConstructedWord> model = (List<ConstructedWord>)obj;
 

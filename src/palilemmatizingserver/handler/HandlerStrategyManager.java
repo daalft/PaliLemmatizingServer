@@ -23,6 +23,7 @@ public class HandlerStrategyManager
 	private SandhiSplitHandler sandhiSplitHandler;
 	private NullHandler nullHandler;
 	private AnalyzerNoDictionaryHandler analyzerNoDictionaryHandler;
+	private SandhiSolverHandler sandhiSolverHandler;
 	
 	////////////////////////////////////////////////////////////////
 	// Constructors
@@ -38,6 +39,7 @@ public class HandlerStrategyManager
 		sandhiSplitHandler = new SandhiSplitHandler();
 		nullHandler = new NullHandler();
 		analyzerNoDictionaryHandler = new AnalyzerNoDictionaryHandler();
+		sandhiSolverHandler = new SandhiSolverHandler();
 	}
 
 	////////////////////////////////////////////////////////////////
@@ -61,6 +63,8 @@ public class HandlerStrategyManager
 				return sandhiSplitHandler;
 			case "/api/json/morphanand":
 				return analyzerNoDictionaryHandler;
+			case "/api/json/sandhisolver":
+				return sandhiSolverHandler;
 			default:
 				logger.warn("No suitable handler found for path " + path);
 				return nullHandler;

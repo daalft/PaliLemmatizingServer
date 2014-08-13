@@ -1,6 +1,8 @@
 package palilemmatizingserver;
 
 
+import java.io.File;
+
 import de.general.jettyserver.*;
 import de.general.cfg.*;
 import de.general.jettyserver.*;
@@ -42,6 +44,7 @@ public class AppRuntime implements IAppRuntime
 	Lemmatizer lemmatizer;
 	MorphologyAnalyzer morphologyAnalyzer;
 	LexiconAdapter lexiconAdapter;
+	SandhiSolver sandhiSolver;
 	
 	////////////////////////////////////////////////////////////////
 	// Constructors
@@ -80,7 +83,7 @@ public class AppRuntime implements IAppRuntime
 
 		formatConverterManager = new FormatConverterManager();
 		formatConverterManager.register(ConverterWordFormGeneration.class);
-		
+		formatConverterManager.register(ConverterSandhiSolver.class);
 		// read paragigm configuration
 
 		ParadigmAccessor pa = new ParadigmAccessor();
@@ -93,6 +96,7 @@ public class AppRuntime implements IAppRuntime
 		sandhiMerge = new SandhiMerge();
 		lemmatizer = new Lemmatizer(pa);
 		morphologyAnalyzer = new MorphologyAnalyzer(pa);
+		sandhiSolver = new SandhiSolver(new File(cfg.getSandhiRuleFile()));
 		try {
 		lexiconAdapter = new LexiconAdapter();
 		} catch (Exception e) {
@@ -151,5 +155,9 @@ public class AppRuntime implements IAppRuntime
 
 	public LexiconAdapter getLexiconAdapter() {
 		return lexiconAdapter;
+	}
+	
+	public SandhiSolver getSandhiSolver() {
+		return sandhiSolver;
 	}
 }

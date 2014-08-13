@@ -58,7 +58,7 @@ public class GeneratorHandler extends AbstractHandler
 			
 			// Pre-premature return block
 			if (gramGrps == null)
-				return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json",ar.getMorphologyGenerator().generate(log, word, null))));
+				return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json",ar.getMorphologyGenerator().generate(log, word, null), null)));
 			
 			// Premature return block
 			if (gramGrps.size() > 1) {
@@ -66,7 +66,7 @@ public class GeneratorHandler extends AbstractHandler
 				for (JObject innerGramGrp : gramGrps) {
 					prematureResult.addAll(ar.getMorphologyGenerator().generate(log, word, innerGramGrp));
 				}
-				return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", prematureResult)));
+				return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", prematureResult, null)));
 			}
 			// End premature return block
 			
@@ -107,7 +107,7 @@ public class GeneratorHandler extends AbstractHandler
 		// ----------------------------------------------------------------
 		// return response
 		
-		return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", constructedWords)));
+		return ResponseContainer.createJSONResponse((JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", constructedWords, null)));
 	}
 
 }

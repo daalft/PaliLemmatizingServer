@@ -47,7 +47,7 @@ public class AnalyzerHandler extends AbstractHandler
 					
 					prematureResult.addAll(words);
 				}
-				JObject ret = (JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", prematureResult));
+				JObject ret = (JObject)(ar.getFormatConverterManager().convert("generatedwordforms", "json", prematureResult, null));
 				
 				return ResponseContainer.createJSONResponse(ret);
 			}

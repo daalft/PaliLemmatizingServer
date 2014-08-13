@@ -4,6 +4,8 @@ package palilemmatizingserver.handler.conv;
 import java.util.*;
 import java.lang.reflect.*;
 
+import de.general.transliteration.ITransliterator;
+
 
 public class FormatConverterManager
 {
@@ -42,18 +44,18 @@ public class FormatConverterManager
 		return converters.get(fromFormat + "~" + toFormat);
 	}
 
-	public Object convert(String fromFormat, String toFormat, Object dataToConvert)
+	public Object convert(String fromFormat, String toFormat, Object dataToConvert, ITransliterator t)
 	{
 		AbstractFormatConverter ac = get(fromFormat, toFormat);
 		if (ac == null) return null;
-		return ac.convert(dataToConvert);
+		return ac.convert(dataToConvert, t);
 	}
 
-	public Object convertE(String fromFormat, String toFormat, Object dataToConvert) throws Exception
+	public Object convertE(String fromFormat, String toFormat, Object dataToConvert, ITransliterator t) throws Exception
 	{
 		AbstractFormatConverter ac = get(fromFormat, toFormat);
 		if (ac == null) throw new Exception("No converter available that is capable of converting from '" + fromFormat + "' to '" + toFormat + "'!");
-		return ac.convert(dataToConvert);
+		return ac.convert(dataToConvert,t);
 	}
 
 }
