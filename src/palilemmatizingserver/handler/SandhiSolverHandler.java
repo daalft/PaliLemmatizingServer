@@ -29,8 +29,10 @@ public class SandhiSolverHandler extends AbstractHandler
 		String fromConvention = request.getRequestParameter("from");
 		String toConvention = request.getRequestParameter("to");
 
-		ITransliterator tFromTo = PaliTransliterationMgr.Instance.get(fromConvention, toConvention);
-		ITransliterator tToFrom = PaliTransliterationMgr.Instance.get(toConvention, fromConvention);
+		// internally, everything is treated as HKC!
+		// because the rule file is in HKC
+		ITransliterator tFromTo = PaliTransliterationMgr.Instance.get(fromConvention, "HKC");
+		ITransliterator tToFrom = PaliTransliterationMgr.Instance.get("HKC", fromConvention);
 
 		if ((tFromTo == null) || (tToFrom == null)) {
 			throw new Exception("No suitable transliterator could be found!");
