@@ -33,8 +33,11 @@ public class SandhiSolverHandler extends AbstractHandler
 		// because the rule file is in HKC
 		ITransliterator tFromTo = PaliTransliterationMgr.Instance.get(fromConvention, "HKC");
 		ITransliterator tToFrom = PaliTransliterationMgr.Instance.get("HKC", fromConvention);
-
-		if ((tFromTo == null) || (tToFrom == null)) {
+		// if we have found no transliterator, 
+		// but the input and output are HKC, go on
+		if (((tFromTo == null) || (tToFrom == null)) && 
+				(!fromConvention.equalsIgnoreCase("HKC") && 
+						(!toConvention.equals("HKC")))) {
 			throw new Exception("No suitable transliterator could be found!");
 		}
 
