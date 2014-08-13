@@ -1,0 +1,308 @@
+#### SANDHIREGELN 1.0
+
+###########
+### I. Sandhi-Induktoren in Endposition
+#############
+### Nach Anusvāra (-ṃ)
+"\\bpaJca\\b", "X"
+"Jca\\b", "M ca"
+"X", "paJca"
+"Jhi\\b", "M hi"
+"mpi\\b", "M pi"
+
+### -pi
+#### -pi hinter -ti-, vor der -ti-Gruppe!
+"tipi$", "ti pi"
+"\\b(t|y)adapi\\b", "\\1aM api" # -d-api
+## -api außer kapi
+"\\bkapi\\b", "X"
+"\\bmahAkapi\\b", "Y"
+"(\\w)api\\b", "\\1a pi"
+"X", "kapi"
+"Y", "mahAkapi"
+## -āpi: Problem a kurz oder lang
+# -ā pi
+"\\b(v|s|y|yath|vimokkh|ettAvat|imin|apar|brahmalok|Ayasm|bahudh|bhagav|tad|kAmAsav|avijjAsav|bhavAsav|pathaviy|asin|chandUpasaMhit|dosUpasaMhit|mohUpasaMhit|muddh|sajjhAyakat|att|may|diTThiy)Api\\b", "\\1A pi"
+# -a pi
+"JcApi\\b", "M ca pi"
+"\\b(c|sah|n|tatr|tass|ajj)Api\\b", "\\1a pi"
+"enApi\\b", "ena pi"
+
+# andere Vokale+pi
+"(\\w[iIuUeo])pi\\b", "\\1 pi"
+"\\btipissa\\b", "ti pi assa"
+
+### -ti
+## mit ’
+
+"’nti", "M ti"
+"I’ti", "i ti"
+"([oei])’ti", "\\1 ti"
+"U’ti", "u ti"
+	
+##### gelängtes -a oder einfach -ā?
+
+"assA’ti", "assa ti"
+"\\bcA’ti", "ca ti"
+"\\bdevA’ti", "deva ti"
+"(\\w+)enA’ti", "\\1ena ti"
+"(\\w+)eyyA’ti", "\\1eyya ti"
+"(\\w+)AyA’ti", "\\1Aya ti"
+"([Ae])mA’ti", "\\1ma ti"
+"(ya|aJJa|gA|ka)thA’ti", "\\1thA ti" # -thā außer s.u.
+"thA’ti", "tha ti" # Imper. 2.pl.act.
+"(samaN|Ah|gotam|kassap|brAhmaN)A’ti", "\\1a ti" 
+# noch mehr Einzelfälle
+"’ssa", " assa"
+"’iti", " iti"
+"’si", " asi"
+"A’t", "A t" # wahrscheinlich einige gelängte -a übergangen, aber wohl ohne Einfluss auf semantische Analyse
+"’tveva", " tveva"
+"’miti", "M iti"
+
+## ohne ’
+# Problem: ’ -nti/-ti und kein Verb -- zum Teil nur mit Formendatenbank lösbar
+
+##miti
+"miti", "M iti"
+
+##-īti
+"(\\bas|caturAs|cullAs|cULAs|\\bp|[^g]g|\\bn)Iti\\b", "\\1Xti"
+"Iti\\b", "i ti"
+"Xti", "Iti"
+
+# o, e, u -ti
+# ACHTUNG!
+# Die folgende Ersetzungsregel darf NICHT für Zeichenketten angewendet werden, die eine dieser Bedingungen erfüllen:
+# a) kommen im Wörterbuch als Lemmata (d.h. als Verben in der 3.P.Sg.) vor;
+# b) enden auf -karoti
+
+"oti$", "o ti"
+
+# Uti: ohne subhUti, pUti
+"\\b(p|subh)Uti\\b", "\\1Xti"
+"Uti\\b", "u ti"
+"Xti", "Uti"
+
+# eti
+"\\b(me|loke|te|dhamme)ti", "\\1 ti"
+
+# -ati, -āti: dito, aber wg. Passiv, Futur usw. (v.a. Passiv, F lässt sich generieren)
+# -āti -> -a ti
+"eyyAti\\b", "eyya ti"
+"AyAti\\b", "Aya ti"
+"(?<!k)AmAti\\b", "Ama ti"
+"ssAti\\b", "ssa ti"
+"(\\w+)enAti\\b", "\\1ena ti"
+"(\\w+)dasAti\\b", "\\1dasa ti"
+"\\b(c|idh|ath|abhAsitth|das)Ati\\b", "\\1a ti"
+
+# -āti- # Liste auf Basis der Apostroph-Fälle (paṭigaṇhāti Fehler: per Hand entfernt)
+
+"\\b(bhagav|v|maraN|dhamm|att|dukkhasm|saGkhAr|taNh|siy|Ayasm|anicc|mAris|anatt|katv|s|bhAvan|paTipad|may|abhisamparAyaJc|mus|dAs|kammakar|samannAgat|addh|Asav|jaJJ|saJJ|sel|dukkh|kiMpabhav|vedan|mAt|veditabb|bhagavat|kusalAvadAn|Jatv|putt|sad|bhAvetabb|brahm|kusal|mam|paJJav|pit|sIlav|yath|bhAvit|cakkhum|jan|kayir|pajah|paJJ|pAv|satim|vipariNAmadhamm|anabhinandit|anajjhosit|anuppAdadhamm|dhIr|mogharAj|paj|phoTThabb|sat|satt|sukhabahul|upaggaNh|upapann|uppann|akaramh|nAhuvamh|nAkaramh|nirodhadhamm|paritt|piyappabhavik|pubbAcariy|ras|satIm|sikkh|suppaTividdh|upekkh|amanAp|bhav|bojjhaGg|candim|diTThiparibbasAn|dukkhat|gandh|gAth|micch|niviTTh|paricit|paTibhAnav|rUp|sadd|sakk|sot|ussad|vadAn|adhidev|Agat|anAsav|avijj|bhikkhun|carant|dhammAnupassan|div|iJjit|kAmad|pahAtabb|paraJc|parinibbantinAsav|paTippassaddh|sacchikAtabb|saddh|saGg|sakh|samApann|sammappadhAn|sAriputt|satipaTThAn|tAt|tathatt|tatthevantaradhAyath|tav|vutt|anabhijjh|anabhisambuddh|anAgAmit|ant|anussarit|apekkh|bhariy|bhUrimedhas|dakkhiN|devat|gat|iddhipAd|idhUpapann|kAlaGkiriy|kampit|khattiy|khippAbhiJJ|khitt|labbh|lokasmimanekarUp|mahiddhik|manasikAtabb|mANav|manoram|nibbattiy|niTTh|nIvaraN|pahIn|pariJJ|paTisenikatt|pavattiy|pucch|puNN|rAj|ratimajjhag|saGkh|samAdhimh|samatt|sibbinimaccag|subbat|tad|Thit|vAsav|vijaJJ|vijj|adassan|Ahar|aJJath|akovid|alamatthadasatar|amatapariyosAn|anuTThit|aparikkhIN|bahulIkatatt|bhavappabhav|bhinn|brahmadatt|dhammataNh|dhammat|dhitim|diTTh|esan|gharamh|janik|kammun|karitv|kat|kath|kAyAnupassan|kusalAkusal|lajj|madhur|mahAnisaMs|mahArAj|maJJath|mat|micchApaTipad|nibbatt|nibbedhabhAgiy|nibbut|paccattamev|paccatthik|pacch|paJJANamitthiy|paJJatt|paNDit|papaJcasaGkh|pApakammant|pasaMsalAbh|paviTThamh|phAsuvihAraJc|pubbadevat|rAjaJJ|saddhamm|saGkhat|samAdhipabbhAr|samAgatamh|samaNAmh|sambodhiparAyaN|samm|samparAyikaJc|samUlik|sapaJJ|sar|sAriputtamoggallAn|sarIrav|sugat|sumaGgal|susamAhit|susamAraddh|sut|sutv|t|tay|tebhiratt|tejas|upaccag|upaTThapetv|vajj|vatthukat|vedanApabhav|vel|vicikicch|vimokkh|vipariNat|yAcan|yAnIkat)Ati\\b", "\\1A ti"
+
+######
+###-eva
+
+#-meva
+"meva\\b", "M eva"
+# -Jceva
+"(?<!pa)Jceva$", "M ca eva"
+
+"(\\w+)sseva\\b", "\\1ssa eva"
+"(\\w+)eneva\\b", "\\1ena eva"
+"(\\w+)aJJeva\\b", "\\1aM eva"
+"(\\w+)cideva\\b", "\\1ci eva"
+"(\\w+)ateva\\b", "\\1ati eva"
+"(\\w+)etheva\\b", "\\1etha eva"
+"(\\w+)yeva\\b", "\\1 eva"
+
+"\\bceva\\b", "ca eva" # ceva
+"\\bneva\\b", "na eva" # neva
+"\\bheva\\b", "hi eva" # heva
+
+"\\b(y|t)Avadeva\\b", "\\1Ava eva" # yāva/tāva
+"\\bsammadeva\\b", "sammA eva" # sammā
+"\\b(t|y)adeva\\b", "\\1aM eva" # taṃ
+"\\betadeva\\b", "etaM eva"
+"\\bsakiM?deva\\b", "sakid eva" # sakid
+"\\byaJJadeva\\b", "yaM yaM eva" # yaṃ yaṃ
+"\\bpunadeva\\b", "puna eva" # puna
+"\\bbahudeva\\b", "bahu eva" # bahu
+"\\bahudeva\\b", "ahu eva" # ahu
+"\\baJJadeva\\b", "aJJaM eva" # aJñaṃ
+"\\byaMyadeva\\b", "yaM yaM eva" # yaṃ yaṃ
+
+"\\bdiTTheva\\b", "diTThe eva"
+"\\b(t|y)atheva\\b", "\\1athA eva"
+"\\b(t|y)attheva\\b", "\\1attha eva"
+"\\bpubbeva\\b", "pubbe eva"
+"\\bidheva\\b", "idha eva"
+"\\bvivicceva\\b", "vivicca eva"
+"\\bsabbeva\\b", "sabbe eva"
+"\\bappeva\\b", "api eva"
+"\\bappevanAma\\b", "api eva nAma"
+"\\baJJatreva\\b", "aJJatra eva"
+"\\beteva\\b", "ete eva"
+"\\bsabbeheva\\b", "sabbhehi eva"
+"\\btatreva\\b", "tatra eva"
+"\\bajjeva\\b", "ajja eva"
+"\\beseva\\b", "esa eva"
+"\\bpaTikacceva\\b", "paTikacca eva"
+"\\bimeheva\\b", "imehi eva"
+"\\btaveva\\b", "tava eva"
+"\\baGganteva\\b", "aGgaM ti eva"
+"\\battheva\\b", "atthi eva"
+"\\bdveva\\b", "dve eva"
+"\\bsabbhireva\\b", "sabbhi eva"
+"\\bidAneva\\b", "idAni eva"
+"\\bettheva\\b", "ettha eva"
+"\\bimasmiJJeva\\b", "imasmiṃ eva"
+"\\bpaJceva\\b", "paJca eva"
+
+### -ānanda
+"\\b(idh|pan|tatr|kathaJc|c|AyAm|katamaJc|vat|kiJc)Ananda\\b", "\\1a Ananda"
+"\\b(atth|natth|vuccat|h|sant)Ananda\\b", "\\1i Ananda"
+"\\btasmAtihAnanda\\b", "tasmā iha Ananda"
+
+### -āvuso
+"\\b(idh|pan|tatr|kathaJc|c|AyAm|katamaJc|vat|kiJc|AraJJiken|jAnanten)Avuso\\b", "\\1a Avuso"
+"\\b(atth|natth|vuccat|h|sant)Avuso\\b", "\\1i Avuso"
+"\\b(sAdh)Avuso\\b", "\\1u Avuso"
+"\\byaMpAvuso\\b", "yaM pi Avuso"
+
+### -aham
+"\\bkhvAhaM\\b", "kho ahaM"
+"\\b(t|y)amahaM\\b", "\\1aM ahaM"
+"\\b(pan|idh|hand|vat|yen|n|ath)AhaM\\b", "\\1a ahaM"
+
+
+#####
+####
+## II. Sandhi-Induktoren in Anfangsposition
+
+# yaṃp
+#api, app
+"\\bappek", "api ek"
+
+### idh-
+"\\bidhAg", "idha Ag"
+"\\bidhApi", "idha pi"
+"\\bidhU", "idha u"
+"\\bidh(e|u)", "idha \\1"
+
+# midhekacce- -- schlechte Orthographie für -m-idhekacce (Brückenkonsonant)
+"\\bmidhe", "idha e"
+"\\byenamidhekacce", "yena idha ekacce"
+
+
+### tatth-
+"\\btatthU", "tattha u"
+"\\btatth(e|u)", "tattha \\1"
+
+### tatra-
+"\\btatr([iIueo])", "tatra \\1"
+"\\btatrU", "tatra u"
+"\\bten(Aha|Ahu|Avuso|Ananda)\\b", "tena \\1"
+"\\btenA(haM|yaM)\\b", "tena a\\1"
+"\\bten(aGgena|aJjaliM|amhi|api)\\b", "tena \\1"
+
+### pana-
+"\\bpan([iIueo])", "pana \\1"
+"\\bpanU", "pana u"
+"\\bpan(Aha|Ahu|Avuso|Ananda)\\b", "pana \\1"
+"\\bpanA(niccaM|yaM|yasmA|)\\b", "pana a\\1"
+"\\bpan(assa|aJJe)\\b", "pana \\1"
+
+# ten-
+"\\bten([iIueo])", "tena \\1"
+"\\bten(Aha|Ahu|Avuso|Ananda)\\b", "tena \\1"
+"\\btenA(haM|yaM)\\b", "tena a\\1"
+"\\bten(aGgena|aJjaliM|amhi|api)\\b", "tena \\1"
+
+# tass-
+"\\btass([iIueo])", "tassa \\1"
+"\\btassU", "tassa u"
+"\\btassA(haM|yaM)\\b", "tassa a\\1"
+
+### yass-
+"\\byassatthAya", "yassa atthAya"
+
+# atha-
+"\\bathA(paraM|yaM)\\b", "atha a\\1"
+"\\bathopi\\b", "atho pi"
+"\\bathassa\\b", "atha assa"
+
+# ca-
+"\\bc(assa|aparaM|amhi|api)\\b", "ca \\1"
+"\\bcA(haM|yaM)\\b", "ca a\\1"
+
+### kho
+"\\bkhv([ie])", "kho \\1"
+"\\bkhvAvuso", "kho Avuso" # Reihenfolge! 1
+"\\bkhv(a|A)", "kho a"    
+
+
+# vuttam-
+"vuttamarahatAti", "vuttaM arahatA ti"
+
+"tabbam(\\w)", "tabbam \\1"
+"\\bsabbame", "sabbam e"
+
+# tena hi
+"\\btenahA", "tena hi A"
+
+# evam-
+"\\bevam(\\w)", "evaM \\1"
+
+
+# tadā-
+"\\btadA(haM|yaM|si)\\b", "tadA a\\1"
+"\\btad(Ananda)\\b", "tadA \\1"
+
+# idam-
+"\\bidam(\\w)", "idaM \\1"
+
+# etad-
+"\\betad(\\w)", "etad \\1"
+
+# tad-
+"\\btada(\\w)", "tad a\\1"
+
+# aham-
+"\\baham(\\w)", "ahaM \\1"
+
+# yaṃ-
+"\\byaMnUnAhaM", "yaM nUna ahaM"
+"\\byaMnUna\\b", "yaM nUna"
+
+# ty-
+"\\btyaMhi\\b", "Y"
+"\\btyA(hutiM|gato|vuso)", "te A\\1"
+"\\btyA(haM|ssa|yaM)", "te a\\1"
+"\\btya", "te a"
+"Y", "tyaMhi"
+
+# iti-
+"\\bicc(?!h)", "iti "
+"\\bicc Ati", "iccAti"
+
+# na-
+"\\bnapp", "na p"
+
+"\\bnAbh(i|ipi|iyA|iyApi|iyaM|iyo|iM|yo|yA)\\b", "X\\1"
+"\\bnAbh", "na abh"
+"X", "nAbh"
+
+"\\bnatveva\\b", "na tu eva"
+"\\bnatthi\\b", "na atthi"
+"\\bnA(paraM|ssa|yaM|nubyaJjanaggAhI|dhimuccati|dhivAseti|hosi|tivattati)\\b", "na a\\1"
+"\\bnayidaM\\b", "na idaM"
+
+"\\byampidaM\\b", "yaM pi idaM"
+"\\byampicchaM\\b", "yaM pi icchaM"
+"\\byampi\\b", "yaM pi"
+
+## pi-
+"pAnanda", "pi Ananda"
+"pissa\\b", "pi assa"
