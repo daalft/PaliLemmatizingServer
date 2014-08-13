@@ -56,24 +56,25 @@ public class SandhiSolverHandler extends AbstractHandler
 		// ----------------------------------------------------------------
 
 		if (!toConvention.toUpperCase().equals("HKC")) {
-			return ResponseContainer.createJSONResponse(
-					(JObject)(ar.getFormatConverterManager().convert(
-							"sandhisolverforms",
-							"json",
-							result,
-							tToFrom
-							))
-					);
+			return this.createSuccessResponse((JObject)
+					(ar.getFormatConverterManager().convert(
+						"sandhisolverforms",
+						"json",
+						result,
+						tToFrom
+					))
+				);
 		}
 
 		// create response
-		return ResponseContainer.createJSONResponse((JObject)
+		return this.createSuccessResponse((JObject)
 				(ar.getFormatConverterManager().convert(
-						"sandhisolverforms", 
-						"json", 
-						result, 
-						null))
-				);
+					"sandhisolverforms",
+					"json",
+					result,
+					null
+				))
+			);
 	}
 
 }
