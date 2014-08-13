@@ -128,7 +128,9 @@ public abstract class AbstractHandler implements IRequestHandler<AppRuntime>
 	public List<JObject> getGramGrpFromDictionary (String word, String collection, AppRuntime ar, ILogInterface log) throws Exception {
 		JObject gramGrp = null;
 
-		JObject[] entries = ar.getLexiconAdapter().getLemmaEntriesAsJObjectArray(word);
+		JObject[] entries = ar.
+				getLexiconAdapter().
+				getLemmaEntriesAsJObjectArray(word);
 		if (entries == null || entries.length == 0) {
 			log.error("Could not find " + word + " in the dictionary!");
 			return null;

@@ -98,9 +98,9 @@ public class AppRuntime implements IAppRuntime
 		morphologyAnalyzer = new MorphologyAnalyzer(pa);
 		sandhiSolver = new SandhiSolver(new File(cfg.getSandhiRuleFile()));
 		try {
-		lexiconAdapter = new LexiconAdapter();
+			lexiconAdapter = new LexiconAdapter();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 
