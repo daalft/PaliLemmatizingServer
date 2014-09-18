@@ -1,6 +1,7 @@
 package palilemmatizingserver.handler;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import palilemmatizingserver.AppRuntime;
@@ -49,7 +50,7 @@ public class SandhiSolverHandler extends AbstractHandler
 
 		SandhiSolver sandhiSolver = ar.getSandhiSolver();
 
-		List<String> result = sandhiSolver.resolveSandhiSingleWord(word);
+		ArrayList<String> result = sandhiSolver.resolveSandhiSingleWord(word);
 
 		result.add(word);
 
