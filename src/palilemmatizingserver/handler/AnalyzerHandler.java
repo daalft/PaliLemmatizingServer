@@ -42,7 +42,7 @@ public class AnalyzerHandler extends AbstractHandler
 				for (JObject innerGramGrp : gramGrps) {
 					
 					
-					List<ConstructedWord> words = ar.getMorphologyAnalyzer().analyze(log, word);
+					List<ConstructedWord> words = ar.getMorphologyAnalyzer().analyzeWithOptions(log, word);
 					
 					
 					prematureResult.addAll(words);
@@ -64,7 +64,7 @@ public class AnalyzerHandler extends AbstractHandler
 		MorphologyAnalyzer ma = ar.getMorphologyAnalyzer();
 		try {
 			if (gramGrp == null)
-				json = ma.analyzeWithDictionary(log, word);
+				json = ma.analyzeWithDictionary(log, word, null);
 			else
 				json = ma.analyzeWithDictionary(log, word, gramGrp);
 		} catch (Exception e) {

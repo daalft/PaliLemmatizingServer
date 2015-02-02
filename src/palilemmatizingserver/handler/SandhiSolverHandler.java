@@ -1,6 +1,7 @@
 package palilemmatizingserver.handler;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import palilemmatizingserver.AppRuntime;
@@ -25,7 +26,7 @@ public class SandhiSolverHandler extends AbstractHandler
 		// process parameters
 
 		String word = request.getRequestParameter("word");
-
+		String originalWord = word;
 		String fromConvention = request.getRequestParameter("from");
 		String toConvention = request.getRequestParameter("to");
 
@@ -49,9 +50,10 @@ public class SandhiSolverHandler extends AbstractHandler
 
 		SandhiSolver sandhiSolver = ar.getSandhiSolver();
 
-		List<String> result = sandhiSolver.resolveSandhiSingleWord(word);
-
-		result.add(word);
+		 
+		ArrayList<String> res = sandhiSolver.sandhiSplit(word);
+		res.add(originalWord);
+		String[] result = res.toArray(new String[0]);
 
 		// ----------------------------------------------------------------
 

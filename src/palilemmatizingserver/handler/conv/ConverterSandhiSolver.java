@@ -50,7 +50,12 @@ public class ConverterSandhiSolver extends AbstractFormatConverter
 
 	public Object convert(Object obj, ITransliterator t)
 	{
-		List<String> list = (List<String>)obj;
+		List<String> list = new ArrayList<String>();
+		String[] array = (String[]) obj;
+		
+		for (String s : array)
+			list.add(s);
+		
 		JObject ret = new JObject();
 		if (t != null) {
 			ret.add("original", new JValue(t.transliterate(list.remove(list.size()-1))));
