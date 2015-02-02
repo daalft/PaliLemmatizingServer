@@ -64,13 +64,16 @@ public class ConverterSandhiSolver extends AbstractFormatConverter
 		}
 		JArray ret2 = new JArray();
 		ret.add("resolved", ret2);
-
+		StringBuilder sb = new StringBuilder();
 		for (String s : list) {
 			if (t != null)
-				ret2.add(new JValue(t.transliterate(s)));
+				sb.append(t.transliterate(s));
 			else
-				ret2.add(new JValue(s));
+				sb.append(s);
+			sb.append(" ");
 		}
+		sb.deleteCharAt(sb.length()-1);
+		ret2.add(new JValue(sb.toString()));
 		return ret;
 	}
 }
