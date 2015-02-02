@@ -51,9 +51,13 @@ public class SandhiSolverHandler extends AbstractHandler
 		SandhiSolver sandhiSolver = ar.getSandhiSolver();
 	 
 		ArrayList<String> res = sandhiSolver.sandhiSplit(word);
-		res.add(originalWord);
-		String[] result = res.toArray(new String[0]);
-
+		
+		String[] result = new String[1];
+		result[0] = originalWord;
+		if (res.size() > 1 && (!res.get(0).equals(originalWord))) {
+			res.add(originalWord);
+			result = res.toArray(new String[0]);	
+		}
 
 		// ----------------------------------------------------------------
 
