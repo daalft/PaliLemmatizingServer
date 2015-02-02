@@ -7,38 +7,44 @@
 			<accessrule kind="accessible" pattern="sun/**"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/JDOM-2.0.5/jdom-2.0.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-annotations-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-client-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-continuation-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-deploy-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-http-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-io-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-jaas-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-jaspi-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-jmx-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-jndi-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-plus-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-proxy-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-rewrite-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-schemas-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-security-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-server-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-servlet-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-servlets-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-util-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-webapp-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/jetty-xml-9.1.4.v20140401.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/lib.zip"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/PaliLemmatizingServer/lib/Jetty-9.1.4.v20140401-libs/servlet-api-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/LibSimpleJSON/dist/LibSimpleJSON.jar" sourcepath="C:/Users/Work/Downloads/Libraries/LibSimpleJSON/src"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/Libraries/LibUtils/dist/LibUtils.jar" sourcepath="C:/Users/Work/Downloads/Libraries/LibUtils/src"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/JDOM-2.0.5/jdom-2.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/2014-07-07_LibSimpleJSON.jar" sourcepath="C:/Users/Work/Downloads/Libraries/LibSimpleJSON/src"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/2014-05-23_LibUtils.jar" sourcepath="C:/Users/Work/Downloads/Libraries/LibUtils/src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PaliNLP2"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/2014-04-29_LibDictionaryClient.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/2014-07-09_LibDictionaryClient.jar"/>
 	<classpathentry kind="lib" path="/PaliNLP2/data/extlib/jackson-annotations-2.2.3.jar"/>
 	<classpathentry kind="lib" path="/PaliNLP2/data/extlib/jackson-core-2.2.3.jar"/>
 	<classpathentry kind="lib" path="/PaliNLP2/data/extlib/jackson-databind-2.2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Work/Downloads/2014-05-23_LibJettyServer.jar" sourcepath="C:/Users/Work/Downloads/2014-05-23_LibJettyServer_srcJava.zip"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-annotations-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-client-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-continuation-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-deploy-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-http-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-io-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-jaas-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-jaspi-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-jmx-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-jndi-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-plus-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-proxy-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-rewrite-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-schemas-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-security-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-server-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-servlet-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-servlets-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-util-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-webapp-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/jetty-xml-9.1.4.v20140401.jar"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/lib.zip"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/Jetty-9.1.4.v20140401-libs/servlet-api-3.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/LibPali_Java"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/LibUtils_Java"/>
+	<classpathentry kind="lib" path="C:/SeNeReKo.David/libs/2014-08-06_LibJettyServer.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/SeNeReKo.David/libs/2014-08-06_LibJettyServer_srcJava.zip!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

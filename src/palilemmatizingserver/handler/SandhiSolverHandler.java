@@ -49,11 +49,11 @@ public class SandhiSolverHandler extends AbstractHandler
 		// resolve
 
 		SandhiSolver sandhiSolver = ar.getSandhiSolver();
-
-		 
+	 
 		ArrayList<String> res = sandhiSolver.sandhiSplit(word);
 		res.add(originalWord);
 		String[] result = res.toArray(new String[0]);
+
 
 		// ----------------------------------------------------------------
 
