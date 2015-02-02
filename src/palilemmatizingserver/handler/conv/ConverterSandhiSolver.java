@@ -52,10 +52,10 @@ public class ConverterSandhiSolver extends AbstractFormatConverter
 	{
 		List<String> list = new ArrayList<String>();
 		String[] array = (String[]) obj;
-		
+
 		for (String s : array)
 			list.add(s);
-		
+
 		JObject ret = new JObject();
 		if (t != null) {
 			ret.add("original", new JValue(t.transliterate(list.remove(list.size()-1))));
@@ -65,15 +65,18 @@ public class ConverterSandhiSolver extends AbstractFormatConverter
 		JArray ret2 = new JArray();
 		ret.add("resolved", ret2);
 		StringBuilder sb = new StringBuilder();
-		for (String s : list) {
-			if (t != null)
-				sb.append(t.transliterate(s));
-			else
-				sb.append(s);
-			sb.append(" ");
+		if (list.size() > 0) {
+			for (String s : list) {
+				if (t != null)
+					sb.append(t.transliterate(s));
+				else
+					sb.append(s);
+				sb.append(" ");
+			}
+			sb.deleteCharAt(sb.length()-1);
+			ret2.add(new JValue(sb.toString()));
 		}
-		sb.deleteCharAt(sb.length()-1);
-		ret2.add(new JValue(sb.toString()));
+
 		return ret;
 	}
 }
