@@ -54,7 +54,7 @@ public class SandhiSolverHandler extends AbstractHandler
 		
 		String[] result = new String[1];
 		result[0] = originalWord;
-		if (res.size() > 1 && (!res.get(0).equals(originalWord))) {
+		if (!res.get(0).equals(originalWord)) {
 			res.add(originalWord);
 			result = res.toArray(new String[0]);	
 		}

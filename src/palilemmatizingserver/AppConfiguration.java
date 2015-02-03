@@ -29,7 +29,7 @@ public class AppConfiguration
 
 	int port;
 	String[] allowedIPAddresses;
-	String sandhiRuleFile;
+	String sandhiRuleFileA, sandhiRuleFileB;
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Constructors
@@ -53,7 +53,8 @@ public class AppConfiguration
 
 		port = r.getPortE("Server", "serverPort");
 		allowedIPAddresses = r.getStringList("Server", "allowedIPAddresses");
-		sandhiRuleFile = r.getString("SandhiRules", "filename");
+		sandhiRuleFileA = r.getString("SandhiRules", "filenameA");
+		sandhiRuleFileB = r.getString("SandhiRules", "filenameB");
 	}
 
 	public String[] getAllowedIPAddresses()
@@ -66,8 +67,12 @@ public class AppConfiguration
 		return port;
 	}
 
-	public String getSandhiRuleFile() {
-		return sandhiRuleFile;
+	public String getSandhiRuleFileA() {
+		return sandhiRuleFileA;
+	}
+
+	public String getSandhiRuleFileB() {
+		return sandhiRuleFileB;
 	}
 
 }

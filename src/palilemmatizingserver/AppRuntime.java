@@ -96,7 +96,9 @@ public class AppRuntime implements IAppRuntime
 		sandhiMerge = new SandhiMerge();
 		lemmatizer = new Lemmatizer(pa);
 		morphologyAnalyzer = new MorphologyAnalyzer(pa);
-		sandhiSolver = new SandhiSolver(new File(cfg.getSandhiRuleFile()));
+		File fileA = new File(cfg.getSandhiRuleFileA());
+		File fileB = new File(cfg.getSandhiRuleFileB());
+		sandhiSolver = new SandhiSolver(fileA,fileB);
 		try {
 			lexiconAdapter = new LexiconAdapter();
 		} catch (Exception e) {

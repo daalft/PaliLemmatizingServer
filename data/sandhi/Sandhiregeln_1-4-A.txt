@@ -1,0 +1,74 @@
+#### SANDHIREGELN 1.2
+
+## Änderungen gegenüber Version 1.1
+#-- Z. 218-219
+#-- Wenn im Ausgangstext mehrfache Apostrophe vorkommen: mit "('+)" statt "'" matchen und, falls gewünscht, Apostrophgruppe über \\1 usw. wieder einsetzen.
+## Änderungen gegenüber Version 1.2
+#-- ganz neuer Abschnitt für Fälle mit ' (Z. 41-60)
+
+###########
+### I. Sandhi-Induktoren in Endposition
+#############
+### Nach Anusvāra (-ṃ)
+"\\bpaJca\\b", "X"
+"Jca\\b", "M ca"
+"X", "paJca"
+"Jhi\\b", "M hi"
+"mpi\\b", "M pi"
+
+### -pi
+#### -pi hinter -ti-, vor der -ti-Gruppe!
+"tipi$", "ti pi"
+"\\b(t|y)adapi\\b", "\\1aM api" # -d-api
+## -api außer kapi
+"\\bkapi\\b", "X"
+"\\bmahAkapi\\b", "Y"
+"(\\w)api\\b", "\\1a pi"
+"X", "kapi"
+"Y", "mahAkapi"
+## -āpi: Problem a kurz oder lang
+# -ā pi
+"\\b(v|s|y|yath|vimokkh|ettAvat|imin|apar|brahmalok|Ayasm|bahudh|bhagav|tad|kAmAsav|avijjAsav|bhavAsav|pathaviy|asin|chandUpasaMhit|dosUpasaMhit|mohUpasaMhit|muddh|sajjhAyakat|att|may|diTThiy)Api\\b", "\\1A pi"
+# -a pi
+"JcApi\\b", "M ca pi"
+"\\b(c|sah|n|tatr|tass|ajj)Api\\b", "\\1a pi"
+"enApi\\b", "ena pi"
+
+# andere Vokale+pi
+"(\\w[iIuUeo])pi\\b", "\\1 pi"
+"\\btipissa\\b", "ti pi assa"
+
+### -ti
+## mit '
+
+"('+)nti", "M\\1ti"
+"('+)miti", "M\\1iti"
+"I('+)ti", "i\\1ti"
+"U('+)ti", "u\\1ti"
+"('+)tveva", "\\1ti eva"
+
+##### gelängtes -a oder einfach -ā?
+
+"assA('+)ti", "assa\\1ti"
+"\\bcA('+)ti", "ca\\1ti"
+"\\bdevA('+)ti", "deva\\1ti"
+"(\\w+)enA('+)ti", "\\1ena\\1ti"
+"(\\w+)eyyA('+)ti", "\\1eyya\\1ti"
+"(\\w+)AyA('+)ti", "\\1Aya\\1ti"
+"([Ae])mA('+)ti", "\\1ma\\1ti"
+"(?<!ya|Ja|gA|ka)thA('+)ti", "tha\\1ti" # (Imper. 2.pl.act.) Achtung! Hier müsst Ihr testen: solche mit | verknüpften Lookbehinds funktionieren nicht überall.
+"(samaN|Ah|gotam|kassap|brAhmaN)A('+)ti", "\\1a\\2ti" 
+
+#### In den folgenden Fällen ist das kein Anführungszeichen, sondern ' ein Apostroph, das anzeigt, dass ein Vokal (und zwar "a") weggefallen ist. Bei der Sandhiauflösung muss hier also das Apostroph durch "a" ersetzt werden.
+"'ssa", " assa"
+"'si", " asi"
+## ohne '
+# Problem: ' -nti/-ti und kein Verb -- zum Teil nur mit Formendatenbank lösbar
+
+##miti
+"miti", "M iti"
+
+##-īti
+"(\\bas|caturAs|cullAs|cULAs|\\bp|[^g]g|\\bn)Iti\\b", "\\1Xti"
+"Iti\\b", "i ti"
+"Xti", "Iti"
