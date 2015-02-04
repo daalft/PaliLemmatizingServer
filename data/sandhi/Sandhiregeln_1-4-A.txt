@@ -52,10 +52,10 @@
 "assA('+)ti", "assa\\1ti"
 "\\bcA('+)ti", "ca\\1ti"
 "\\bdevA('+)ti", "deva\\1ti"
-"(\\w+)enA('+)ti", "\\1ena\\1ti"
-"(\\w+)eyyA('+)ti", "\\1eyya\\1ti"
-"(\\w+)AyA('+)ti", "\\1Aya\\1ti"
-"([Ae])mA('+)ti", "\\1ma\\1ti"
+"(\\w+)enA('+)ti", "\\1ena\\2ti"
+"(\\w+)eyyA('+)ti", "\\1eyya\\2ti"
+"(\\w+)AyA('+)ti", "\\1Aya\\2ti"
+"([Ae])mA('+)ti", "\\1ma\\2ti"
 "(?<!ya|Ja|gA|ka)thA('+)ti", "tha\\1ti" # (Imper. 2.pl.act.) Achtung! Hier müsst Ihr testen: solche mit | verknüpften Lookbehinds funktionieren nicht überall.
 "(samaN|Ah|gotam|kassap|brAhmaN)A('+)ti", "\\1a\\2ti" 
 
