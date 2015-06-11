@@ -31,6 +31,11 @@ public class AppConfiguration
 	String[] allowedIPAddresses;
 	String sandhiRuleFileA, sandhiRuleFileB;
 	
+	int dictPort;
+	String dictDomain, dictUser, dictPw;
+	
+	String taggerModel;
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Constructors
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,6 +60,11 @@ public class AppConfiguration
 		allowedIPAddresses = r.getStringList("Server", "allowedIPAddresses");
 		sandhiRuleFileA = r.getString("SandhiRules", "filenameA");
 		sandhiRuleFileB = r.getString("SandhiRules", "filenameB");
+		dictDomain = r.getString("Dictionary", "domain");
+		dictPort = r.getInt("Dictionary", "port");
+		dictUser = r.getString("Dictionary", "user");
+		dictPw = r.getString("Dictionary", "pw");
+		taggerModel = r.getString("Tagger", "model");
 	}
 
 	public String[] getAllowedIPAddresses()
@@ -73,6 +83,26 @@ public class AppConfiguration
 
 	public String getSandhiRuleFileB() {
 		return sandhiRuleFileB;
+	}
+
+	public String getDictDomain() {
+		return dictDomain;
+	}
+
+	public int getDictPort () {
+		return dictPort;
+	}
+	
+	public String getDictUser () {
+		return dictUser;
+	}
+	
+	public String getDictPw () {
+		return dictPw;
+	}
+
+	public String getTaggerModel() {
+		return taggerModel;
 	}
 
 }

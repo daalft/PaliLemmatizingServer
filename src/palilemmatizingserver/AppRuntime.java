@@ -96,17 +96,19 @@ public class AppRuntime implements IAppRuntime
 		wordclassStemmer = new WordclassStemmer(pa);
 		defaultSandhiSplitter = new SandhiSplit();	// initialize with unlimited splitting depth
 		sandhiMerge = new SandhiMerge();
-		lemmatizer = new Lemmatizer(pa);
-		morphologyAnalyzer = new MorphologyAnalyzer(pa);
+		
 		File fileA = new File(cfg.getSandhiRuleFileA());
 		File fileB = new File(cfg.getSandhiRuleFileB());
 		sandhiSolver = new SandhiSolver(fileA,fileB);
 		try {
-			lexiconAdapter = new LexiconAdapter();
+			lexiconAdapter = new LexiconAdapter(cfg.getDictDomain(),
+					cfg.getDictPort(), cfg.getDictUser(), cfg.getDictPw());
 		} catch (Exception e) {
 			throw e;
 		}
-		tagger = new CombinedTagger("./data/pos/pali-pos-maxent-2.1.bin");
+		tagger = new CombinedTagger(cfg.getTaggerModel());
+		lemmatizer = new Lemmatizer(pa);
+		morphologyAnalyzer = new MorphologyAnalyzer(pa,lexiconAdapter);
 	}
 
 	@Override
