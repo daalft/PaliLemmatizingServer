@@ -1,6 +1,7 @@
 package palilemmatizingserver.handler;
 
 
+import tagger.CombinedTagger;
 import de.general.log.ILogInterface;
 
 
@@ -24,6 +25,7 @@ public class HandlerStrategyManager
 	private NullHandler nullHandler;
 	private AnalyzerNoDictionaryHandler analyzerNoDictionaryHandler;
 	private SandhiSolverHandler sandhiSolverHandler;
+	private CombinedTaggerHandler combinedTaggerHandler;
 	
 	////////////////////////////////////////////////////////////////
 	// Constructors
@@ -40,6 +42,7 @@ public class HandlerStrategyManager
 		nullHandler = new NullHandler();
 		analyzerNoDictionaryHandler = new AnalyzerNoDictionaryHandler();
 		sandhiSolverHandler = new SandhiSolverHandler();
+		combinedTaggerHandler = new CombinedTaggerHandler();
 	}
 
 	////////////////////////////////////////////////////////////////
@@ -65,6 +68,8 @@ public class HandlerStrategyManager
 				return analyzerNoDictionaryHandler;
 			case "/api/json/sandhisolver":
 				return sandhiSolverHandler;
+			case "/api/json/tagger":
+				return combinedTaggerHandler;
 			default:
 				logger.warn("No suitable handler found for path " + path);
 				return nullHandler;

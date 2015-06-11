@@ -35,10 +35,11 @@ public class PaliRequestHandler extends AbstractHandler
 		String requestPath = requestWrapper.getRequestPath();
 
 		try {
+			if (!requestPath.endsWith("tagger")) {
 			// verify basic arguments
 
 			verifyParamStrPali(requestWrapper, "word", logger);
-
+			}
 			// delegate processing to a dedicated handler instance
 
 			AbstractHandler selectedHandler = strategy.getHandler(requestPath, logger);
