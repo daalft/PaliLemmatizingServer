@@ -11,6 +11,7 @@ import de.unitrier.daalft.pali.lexicon.LexiconAdapter;
 import de.unitrier.daalft.pali.morphology.paradigm.*;
 import palilemmatizingserver.handler.*;
 import palilemmatizingserver.handler.conv.*;
+import tagger.CombinedTagger;
 import de.unitrier.daalft.pali.morphology.*;
 import de.unitrier.daalft.pali.phonology.*;
 
@@ -45,6 +46,7 @@ public class AppRuntime implements IAppRuntime
 	MorphologyAnalyzer morphologyAnalyzer;
 	LexiconAdapter lexiconAdapter;
 	SandhiSolver sandhiSolver;
+	CombinedTagger tagger;
 	
 	////////////////////////////////////////////////////////////////
 	// Constructors
@@ -98,12 +100,13 @@ public class AppRuntime implements IAppRuntime
 		morphologyAnalyzer = new MorphologyAnalyzer(pa);
 		File fileA = new File(cfg.getSandhiRuleFileA());
 		File fileB = new File(cfg.getSandhiRuleFileB());
-		sandhiSolver = new SandhiSolver(fileA,fileB);
+		//sandhiSolver = new SandhiSolver(fileA,fileB);
 		try {
-			lexiconAdapter = new LexiconAdapter();
+			//lexiconAdapter = new LexiconAdapter();
 		} catch (Exception e) {
 			throw e;
 		}
+		tagger = new CombinedTagger("./data/pos/pali-pos-maxent-2.1.bin");
 	}
 
 	@Override
@@ -161,5 +164,9 @@ public class AppRuntime implements IAppRuntime
 	
 	public SandhiSolver getSandhiSolver() {
 		return sandhiSolver;
+	}
+	
+	public CombinedTagger getTagger () {
+		return tagger;
 	}
 }
