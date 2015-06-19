@@ -12,6 +12,8 @@ import de.general.json.JArray;
 import de.general.json.JObject;
 import de.general.json.JValue;
 import de.general.log.ILogInterface;
+import de.unitrier.daalft.pali.lexicon.DictionaryLookup;
+import de.unitrier.daalft.pali.lexicon.HashedDictionaryLookup;
 import de.unitrier.daalft.pali.lexicon.LexiconAdapter;
 import de.unitrier.daalft.pali.morphology.Lemmatizer;
 import de.unitrier.daalft.pali.morphology.element.ConstructedWord;
@@ -37,7 +39,7 @@ public class CombinedTaggerHandler extends AbstractHandler {
 		
 		// tag sentence
 		String[] tags = ar.getTagger().tag(list.toArray(new String[0]));
-		LexiconAdapter lexiconAdapter = ar.getLexiconAdapter();
+		DictionaryLookup lookup = ar.getDictionaryLookup();
 		Lemmatizer lemmatizer = ar.getLemmatizer();
 		for (int i = 0; i < tags.length; i++) {
 			JObject token = tokens[i];
@@ -51,7 +53,7 @@ public class CombinedTaggerHandler extends AbstractHandler {
 			Set<String> lemmaSet = new HashSet<String>();
 			for (ConstructedWord lemma : lemmata) {
 
-				JObject[] lemmaObjects = lexiconAdapter.getLemmaEntriesAsJObjectArray(lemma.getLemma());
+				JObject[] lemmaObjects = lookup.getLemmata(lemma.getLemma());
 				if (lemmaObjects == null) 
 					continue;// TODO try something else?
 

@@ -7,6 +7,8 @@ import de.general.jettyserver.*;
 import de.general.cfg.*;
 import de.general.jettyserver.*;
 import de.general.log.*;
+import de.unitrier.daalft.pali.lexicon.DictionaryLookup;
+import de.unitrier.daalft.pali.lexicon.HashedDictionaryLookup;
 import de.unitrier.daalft.pali.lexicon.LexiconAdapter;
 import de.unitrier.daalft.pali.morphology.paradigm.*;
 import palilemmatizingserver.handler.*;
@@ -47,6 +49,7 @@ public class AppRuntime implements IAppRuntime
 	LexiconAdapter lexiconAdapter;
 	SandhiSolver sandhiSolver;
 	CombinedTagger tagger;
+	DictionaryLookup dictionaryLookup;
 	
 	////////////////////////////////////////////////////////////////
 	// Constructors
@@ -109,6 +112,7 @@ public class AppRuntime implements IAppRuntime
 		tagger = new CombinedTagger(cfg.getTaggerModel());
 		lemmatizer = new Lemmatizer(pa);
 		morphologyAnalyzer = new MorphologyAnalyzer(pa,lexiconAdapter);
+		dictionaryLookup = new HashedDictionaryLookup(cfg.getDictDomain(), cfg.getDictPort(),cfg.getDictUser(), cfg.getDictPw());
 	}
 
 	@Override
@@ -170,5 +174,9 @@ public class AppRuntime implements IAppRuntime
 	
 	public CombinedTagger getTagger () {
 		return tagger;
+	}
+
+	public DictionaryLookup getDictionaryLookup() {
+		return dictionaryLookup;
 	}
 }
