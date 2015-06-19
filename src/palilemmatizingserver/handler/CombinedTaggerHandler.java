@@ -23,11 +23,11 @@ public class CombinedTaggerHandler extends AbstractHandler {
 	public ResponseContainer processRequest(AppRuntime ar,
 			ClientRequest request, ILogInterface log) throws Exception {
 		// retrieve sentence object
-		String sentenceString = request.getRequestParameter("sentence");
+		String sentenceString = request.getRequestParameter("s");
 		// convert to JObject
-		JObject sentenceObject = WordConverter.toJObject("{\"tokens\":"+sentenceString+"}");
+		JObject sentenceObject = WordConverter.toJObject(sentenceString);
 		// retrieve tokens
-		JObject[] tokens = sentenceObject.getPropertyObjectList("tokens");
+		JObject[] tokens = sentenceObject.getPropertyObjectList("tk");
 
 		List<String> list = new ArrayList<String>();
 		// collect tokens
