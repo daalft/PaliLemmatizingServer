@@ -6,10 +6,10 @@ import java.io.File;
 import de.general.jettyserver.*;
 import de.general.cfg.*;
 import de.general.log.*;
-import de.unitrier.daalft.pali.lexicon.CachedDictionaryLookup;
+import de.unitrier.daalft.pali.cache.CachedDictionaryLookup;
+import de.unitrier.daalft.pali.cache.CachedLemmatizer;
 import de.unitrier.daalft.pali.lexicon.LexiconAdapter;
 import de.unitrier.daalft.pali.morphology.paradigm.*;
-import palilemmatizingserver.handler.*;
 import palilemmatizingserver.handler.conv.*;
 import tagger.CombinedTagger;
 import de.unitrier.daalft.pali.morphology.*;
@@ -42,7 +42,7 @@ public class AppRuntime implements IAppRuntime
 	WordclassStemmer wordclassStemmer;
 	SandhiSplit defaultSandhiSplitter;
 	SandhiMerge sandhiMerge;
-	Lemmatizer lemmatizer;
+	CachedLemmatizer lemmatizer;
 	MorphologyAnalyzer morphologyAnalyzer;
 	LexiconAdapter lexiconAdapter;
 	SandhiSolver sandhiSolver;
@@ -114,7 +114,7 @@ public class AppRuntime implements IAppRuntime
 			throw e;
 		}
 		tagger = new CombinedTagger(cfg.getTaggerModel());
-		lemmatizer = new Lemmatizer(pa);
+		lemmatizer = new CachedLemmatizer(pa, cfg.getMaxCacheSize(), cfg.getMaxCacheDurationInSeconds());
 		morphologyAnalyzer = new MorphologyAnalyzer(pa,lexiconAdapter);
 		dictionaryLookup = new CachedDictionaryLookup(cfg.getDictDomain(), cfg.getDictPort(),cfg.getDictUser(), cfg.getDictPw(), maxCacheSize, maxCacheDurationInSeconds);
 		
@@ -164,7 +164,7 @@ public class AppRuntime implements IAppRuntime
 		return sandhiMerge;
 	}
 
-	public Lemmatizer getLemmatizer()
+	public CachedLemmatizer getLemmatizer()
 	{
 		return lemmatizer;
 	}

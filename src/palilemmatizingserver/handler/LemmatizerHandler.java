@@ -5,6 +5,7 @@ import palilemmatizingserver.AppRuntime;
 import de.general.jettyserver.*;
 import de.general.json.JObject;
 import de.general.log.ILogInterface;
+import de.unitrier.daalft.pali.cache.CachedLemmatizer;
 import de.unitrier.daalft.pali.morphology.Lemmatizer;
 import de.unitrier.daalft.pali.tools.WordConverter;
 
@@ -27,7 +28,7 @@ public class LemmatizerHandler extends AbstractHandler
 		// ----------------------------------------------------------------
 		// lemmatize
 		
-		Lemmatizer l = ar.getLemmatizer();
+		CachedLemmatizer l = ar.getLemmatizer();
 		String json = "";
 		try {
 			json = l.lemmatizeWithDictionary(log, word, pos);

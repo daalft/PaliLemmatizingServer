@@ -12,7 +12,9 @@ import de.general.json.JArray;
 import de.general.json.JObject;
 import de.general.json.JValue;
 import de.general.log.ILogInterface;
-import de.unitrier.daalft.pali.lexicon.CachedDictionaryLookup;
+import de.unitrier.daalft.pali.cache.Cache;
+import de.unitrier.daalft.pali.cache.CachedDictionaryLookup;
+import de.unitrier.daalft.pali.cache.CachedLemmatizer;
 import de.unitrier.daalft.pali.morphology.Lemmatizer;
 import de.unitrier.daalft.pali.morphology.element.ConstructedWord;
 import de.unitrier.daalft.pali.tools.WordConverter;
@@ -38,14 +40,18 @@ public class CombinedTaggerHandler extends AbstractHandler {
 		// tag sentence
 		String[] tags = ar.getTagger().tag(list.toArray(new String[0]));
 		CachedDictionaryLookup lookup = ar.getDictionaryLookup();
-		Lemmatizer lemmatizer = ar.getLemmatizer();
+		CachedLemmatizer lemmatizer = ar.getLemmatizer();
+		
 		for (int i = 0; i < tags.length; i++) {
 			JObject token = tokens[i];
 			String tag = tags[i];
 			token.add("pos", new JValue(tag));
 			String nlptag = TagMapper.map(tag);
 			String tokenText = token.getPropertyStringValueNormalized("t").toLowerCase();
-			List<ConstructedWord> lemmata = lemmatizer.lemmatize(null, tokenText, nlptag);
+			List<ConstructedWord> lemmata = lemmatizer.lemmatize(tokenText, nlptag);
+			if (lemmata == null) {
+				lemmata = lemmatizer.lemmatize(tokenText, nlptag);
+			}
 			JArray lemmas = new JArray();
 			token.add("lemma", lemmas);
 			Set<String> lemmaSet = new HashSet<String>();
