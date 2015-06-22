@@ -12,9 +12,7 @@ import de.general.json.JArray;
 import de.general.json.JObject;
 import de.general.json.JValue;
 import de.general.log.ILogInterface;
-import de.unitrier.daalft.pali.lexicon.DictionaryLookup;
-import de.unitrier.daalft.pali.lexicon.HashedDictionaryLookup;
-import de.unitrier.daalft.pali.lexicon.LexiconAdapter;
+import de.unitrier.daalft.pali.lexicon.CachedDictionaryLookup;
 import de.unitrier.daalft.pali.morphology.Lemmatizer;
 import de.unitrier.daalft.pali.morphology.element.ConstructedWord;
 import de.unitrier.daalft.pali.tools.WordConverter;
@@ -39,7 +37,7 @@ public class CombinedTaggerHandler extends AbstractHandler {
 		
 		// tag sentence
 		String[] tags = ar.getTagger().tag(list.toArray(new String[0]));
-		DictionaryLookup lookup = ar.getDictionaryLookup();
+		CachedDictionaryLookup lookup = ar.getDictionaryLookup();
 		Lemmatizer lemmatizer = ar.getLemmatizer();
 		for (int i = 0; i < tags.length; i++) {
 			JObject token = tokens[i];

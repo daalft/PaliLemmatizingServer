@@ -36,6 +36,8 @@ public class AppConfiguration
 	
 	String taggerModel;
 	
+	int maxCacheSize, maxCacheDurationInSeconds;
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Constructors
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,6 +67,9 @@ public class AppConfiguration
 		dictUser = r.getString("Dictionary", "user");
 		dictPw = r.getString("Dictionary", "pw");
 		taggerModel = r.getString("Tagger", "model");
+		maxCacheSize = r.getInt("Cache", "maxSize");
+		maxCacheDurationInSeconds = r.getInt("Cache", "maxDurationInSeconds");
+		
 	}
 
 	public String[] getAllowedIPAddresses()
@@ -105,4 +110,11 @@ public class AppConfiguration
 		return taggerModel;
 	}
 
+	public int getMaxCacheSize() {
+		return maxCacheSize;
+	}
+	
+	public int getMaxCacheDurationInSeconds() {
+		return maxCacheDurationInSeconds;
+	}
 }

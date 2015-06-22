@@ -5,10 +5,8 @@ import java.io.File;
 
 import de.general.jettyserver.*;
 import de.general.cfg.*;
-import de.general.jettyserver.*;
 import de.general.log.*;
-import de.unitrier.daalft.pali.lexicon.DictionaryLookup;
-import de.unitrier.daalft.pali.lexicon.HashedDictionaryLookup;
+import de.unitrier.daalft.pali.lexicon.CachedDictionaryLookup;
 import de.unitrier.daalft.pali.lexicon.LexiconAdapter;
 import de.unitrier.daalft.pali.morphology.paradigm.*;
 import palilemmatizingserver.handler.*;
@@ -49,7 +47,7 @@ public class AppRuntime implements IAppRuntime
 	LexiconAdapter lexiconAdapter;
 	SandhiSolver sandhiSolver;
 	CombinedTagger tagger;
-	DictionaryLookup dictionaryLookup;
+	CachedDictionaryLookup dictionaryLookup;
 	
 	////////////////////////////////////////////////////////////////
 	// Constructors
@@ -99,10 +97,16 @@ public class AppRuntime implements IAppRuntime
 		wordclassStemmer = new WordclassStemmer(pa);
 		defaultSandhiSplitter = new SandhiSplit();	// initialize with unlimited splitting depth
 		sandhiMerge = new SandhiMerge();
+		String domain = cfg.getDictDomain();
+		int dPort = cfg.getDictPort();
+		String dUser = cfg.getDictUser();
+		String dPw = cfg.getDictPw();
+		int maxCacheSize = cfg.getMaxCacheSize();
+		int maxCacheDurationInSeconds = cfg.getMaxCacheDurationInSeconds();
 		
 		File fileA = new File(cfg.getSandhiRuleFileA());
 		File fileB = new File(cfg.getSandhiRuleFileB());
-		sandhiSolver = new SandhiSolver(fileA,fileB);
+		sandhiSolver = new SandhiSolver(fileA,fileB, domain, dPort, dUser, dPw, maxCacheSize, maxCacheDurationInSeconds);
 		try {
 			lexiconAdapter = new LexiconAdapter(cfg.getDictDomain(),
 					cfg.getDictPort(), cfg.getDictUser(), cfg.getDictPw());
@@ -112,7 +116,8 @@ public class AppRuntime implements IAppRuntime
 		tagger = new CombinedTagger(cfg.getTaggerModel());
 		lemmatizer = new Lemmatizer(pa);
 		morphologyAnalyzer = new MorphologyAnalyzer(pa,lexiconAdapter);
-		dictionaryLookup = new HashedDictionaryLookup(cfg.getDictDomain(), cfg.getDictPort(),cfg.getDictUser(), cfg.getDictPw());
+		dictionaryLookup = new CachedDictionaryLookup(cfg.getDictDomain(), cfg.getDictPort(),cfg.getDictUser(), cfg.getDictPw(), maxCacheSize, maxCacheDurationInSeconds);
+		
 	}
 
 	@Override
@@ -176,7 +181,7 @@ public class AppRuntime implements IAppRuntime
 		return tagger;
 	}
 
-	public DictionaryLookup getDictionaryLookup() {
+	public CachedDictionaryLookup getDictionaryLookup() {
 		return dictionaryLookup;
 	}
 }
