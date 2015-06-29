@@ -46,9 +46,9 @@ public class CombinedTaggerHandler extends AbstractHandler {
 			token.add("pos", new JValue(tag));
 			String nlptag = TagMapper.map(tag);
 			String tokenText = token.getPropertyStringValueNormalized("t").toLowerCase();
-			List<ConstructedWord> lemmata = lemmatizer.lemmatize(tokenText, nlptag);
+			List<ConstructedWord> lemmata = lemmatizer.lemmatize(log,tokenText, nlptag);
 			if (lemmata == null) {
-				lemmata = lemmatizer.lemmatize(tokenText, nlptag);
+				lemmata = lemmatizer.lemmatize(log,tokenText, nlptag);
 			}
 			JArray lemmas = new JArray();
 			token.add("lemma", lemmas);
